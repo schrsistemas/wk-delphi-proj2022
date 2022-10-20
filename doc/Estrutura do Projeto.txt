@@ -1,0 +1,17 @@
+
+Estrutura de pastas
+
+\src\... -- Fontes do Projeto
+\src\cliente\ -- Aplicação Cliente
+\src\servidor\ -- Aplicação Servidor
+
+\db -- Base de Dados: DDL
+\doc -- Documentação do Projeto
+
+
+Tecnologias utilizadas
+
+- Delphi Rio // Desenvolvimento da aplicação
+- PostgreSQL // Gerenciador de Banco de Dados
+
+
