@@ -11,7 +11,11 @@ uses
   UClasseCfgDB in '..\classes-comum\negocio\UClasseCfgDB.pas',
   UControle.ClasseCfgDB in '..\classes-comum\controle\UControle.ClasseCfgDB.pas',
   UDAO.ClasseCfgDB in '..\classes-comum\dao\UDAO.ClasseCfgDB.pas',
-  UFrmMenuServidor in 'UFrmMenuServidor.pas' {FrmMenuServidor};
+  UFrmMenuServidor in 'UFrmMenuServidor.pas' {FrmMenuServidor},
+  URestUtil in '..\classes-comum\util\URestUtil.pas',
+  UThreadMonitorEndereco in 'UThreadMonitorEndereco.pas',
+  UConsultaCEP in '..\classes-comum\util\UConsultaCEP.pas',
+  UFuncoes.Texto in '..\classes-comum\util\UFuncoes.Texto.pas';
 
 {$R *.res}
 

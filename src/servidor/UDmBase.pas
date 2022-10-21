@@ -5,13 +5,12 @@ interface
 uses
   System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Phys,
   FireDAC.Comp.UI, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
-  FireDAC.Phys.PG, Forms, FireDAC.Phys.MySQL, UClasseCfgDB,
-  UControle.ClasseCfgDB, Dialogs, UConstantes, FireDAC.Comp.Script,
-  FireDAC.Moni.Base, FireDAC.Moni.RemoteClient, FireDAC.Phys.PGDef,
-  FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys.MySQLDef,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.VCLUI.Login, FireDAC.VCLUI.Script, FireDAC.VCLUI.Error,
+  FireDAC.Phys.PG, FireDAC.Phys.MySQL, UClasseCfgDB, UControle.ClasseCfgDB,
+  UConstantes, FireDAC.Comp.Script, FireDAC.Moni.Base, FireDAC.Moni.RemoteClient,
+  FireDAC.Phys.PGDef, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
+  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
+  FireDAC.Phys.MySQLDef, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
+  FireDAC.DApt, FireDAC.VCLUI.Login, FireDAC.VCLUI.Script, FireDAC.VCLUI.Error,
   FireDAC.Comp.ScriptCommands, FireDAC.Stan.Util, FireDAC.VCLUI.Wait;
 
 type
@@ -54,7 +53,7 @@ var
 
 implementation
 
-{%CLASSGROUP 'Vcl.Controls.TControl'}
+{%CLASSGROUP 'System.Classes.TPersistent'}
 
 {$R *.dfm}
 
@@ -88,14 +87,14 @@ begin
     sgdbMySQL:
       begin
         FDPhysMySQLDriverLink.Release;
-        FDPhysMySQLDriverLink.VendorLib := ExtractFilePath(Application.ExeName) + 'libmysql.dll';
+        FDPhysMySQLDriverLink.VendorLib := ExtractFilePath(ParamStr(0)) + 'libmysql.dll';
         Conexao.Params.Add('');
 
       end;
     sgdbPostgreSQL:
       begin
         FDPhysPgDriverLink.Release;
-        FDPhysPgDriverLink.VendorLib := ExtractFilePath(Application.ExeName) + 'libpq.dll';
+        FDPhysPgDriverLink.VendorLib := ExtractFilePath(ParamStr(0)) + 'libpq.dll';
 
         Conexao.Params.Add('MetaDefSchema=MySchema');
         Conexao.Params.Add('ExtendedMetadata=True');
@@ -108,7 +107,7 @@ begin
     Result := Conexao.Connected;
   except
     on E: Exception do
-      ShowMessage('Erro ao conectar a Base de Dados' + #13#10 + E.Message);
+      raise Exception.Create('Erro ao conectar a Base de Dados' + #13#10 + E.Message);
   end;
 
 end;
@@ -145,7 +144,7 @@ class function TDmBase.CreateDm: Boolean;
 begin
   if not Assigned(DmBase) then
   begin
-    DmBase := TDmBase.Create(Application);
+    DmBase := TDmBase.Create(nil);
 
     Result := DmBase.Conectar(TControleClasseCfgDB.CarregaIniParaClasse);
 

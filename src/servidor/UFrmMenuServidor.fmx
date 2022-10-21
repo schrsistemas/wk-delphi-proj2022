@@ -2,17 +2,18 @@ object FrmMenuServidor: TFrmMenuServidor
   Left = 0
   Top = 0
   Caption = 'Menu : Servidor'
-  ClientHeight = 500
-  ClientWidth = 778
+  ClientHeight = 428
+  ClientWidth = 663
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnShow = FormShow
   DesignerMasterStyle = 0
   object LytContainer: TLayout
     Align = Client
-    Size.Width = 778.000000000000000000
-    Size.Height = 500.000000000000000000
+    Size.Width = 663.000000000000000000
+    Size.Height = 428.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 0
     object tbcMenu: TTabControl
@@ -21,28 +22,99 @@ object FrmMenuServidor: TFrmMenuServidor
       Margins.Top = 4.000000000000000000
       Margins.Right = 4.000000000000000000
       Margins.Bottom = 4.000000000000000000
-      Size.Width = 770.000000000000000000
-      Size.Height = 492.000000000000000000
+      Size.Width = 655.000000000000000000
+      Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
-        770s
-        466s
-        770s
-        466s)
+        655s
+        394s
+        655s
+        394s
+        655s
+        394s)
       object tbtmMenu: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 51.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
         Text = 'Menu'
+        ExplicitSize.cx = 51.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        object grpServidor: TGroupBox
+          Position.X = 32.000000000000000000
+          Position.Y = 78.000000000000000000
+          Size.Width = 569.000000000000000000
+          Size.Height = 75.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Servidor'
+          TabOrder = 9
+          object LblPorta: TLabel
+            StyledSettings = [Family, FontColor]
+            Position.X = 56.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Text = 'Porta:'
+            TabOrder = 0
+          end
+          object edtPorta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 1
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.Font.StyleExt = {00070000000000000004000000}
+            Position.X = 136.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 81.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            StyledSettings = [Family, FontColor]
+          end
+          object SBStart: TSpeedButton
+            StyledSettings = [Family, Style]
+            Position.X = 248.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Start'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = claDarkgreen
+          end
+          object SBStop: TSpeedButton
+            StyledSettings = [Family, Style]
+            Position.X = 376.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 100.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Stop'
+            TextSettings.Font.Size = 18.000000000000000000
+            TextSettings.FontColor = claCrimson
+          end
+        end
+        object LblStatusDB: TLabel
+          StyledSettings = [Family, Style]
+          Position.X = 40.000000000000000000
+          Position.Y = 22.000000000000000000
+          Size.Width = 361.000000000000000000
+          Size.Height = 43.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 18.000000000000000000
+          TextSettings.FontColor = claRed
+          Text = 'LblStatusDB'
+          TabOrder = 3
+        end
       end
       object tbtmLog: TTabItem
         CustomIcon = <
@@ -55,7 +127,108 @@ object FrmMenuServidor: TFrmMenuServidor
         StyleLookup = ''
         TabOrder = 0
         Text = 'Log'
+        ExplicitSize.cx = 40.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        object mmoLog: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Align = Client
+          Size.Width = 655.000000000000000000
+          Size.Height = 394.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 0
+          Viewport.Width = 651.000000000000000000
+          Viewport.Height = 390.000000000000000000
+        end
+      end
+      object tbtmTest: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 41.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Test'
+        object grpTestCEP_ViaCEP: TGroupBox
+          Align = Top
+          Margins.Left = 8.000000000000000000
+          Margins.Top = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 8.000000000000000000
+          Size.Width = 639.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Consulta CEP'
+          TabOrder = 0
+          object edtCEP: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 3
+            Position.X = 56.000000000000000000
+            Position.Y = 32.000000000000000000
+          end
+          object mmoDadosCEP: TMemo
+            Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+            DataDetectorTypes = []
+            Align = Right
+            Position.X = 301.000000000000000000
+            Size.Width = 338.000000000000000000
+            Size.Height = 100.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            Viewport.Width = 334.000000000000000000
+            Viewport.Height = 96.000000000000000000
+          end
+          object SBConsultarCEP: TSpeedButton
+            Position.X = 168.000000000000000000
+            Position.Y = 24.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 33.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Consultar'
+            OnClick = SBConsultarCEPClick
+          end
+          object Lbl1: TLabel
+            Position.X = 24.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 33.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'CEP:'
+            TabOrder = 2
+          end
+        end
       end
     end
+  end
+  object RESTClient1: TRESTClient
+    Authenticator = SimpleAuthenticator1
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'https://viacep.com.br/ws/89265527/json'
+    Params = <>
+    Left = 240
+    Top = 208
+  end
+  object RESTRequest1: TRESTRequest
+    Client = RESTClient1
+    Params = <>
+    Response = RESTResponse1
+    SynchronizedEvents = False
+    Left = 240
+    Top = 264
+  end
+  object RESTResponse1: TRESTResponse
+    ContentType = 'application/json'
+    Left = 336
+    Top = 208
+  end
+  object SimpleAuthenticator1: TSimpleAuthenticator
+    Left = 336
+    Top = 264
   end
 end
