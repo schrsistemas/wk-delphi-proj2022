@@ -41,8 +41,8 @@ type
   protected
   public
     constructor Create;
-    destructor Destroy;
-    class function Instance: IConsultaCEP;
+    destructor Destroy; override;
+    class function Instance: TConsultaCEP;
 
     function Consultar(aCEP: string): TClasseCEP;
 
@@ -57,47 +57,55 @@ function TConsultaCEP.Consultar(aCEP: string): TClasseCEP;
 begin
   Result := TClasseCEP.Create;
 
-  var restAux: TRestUtil := TRestUtil(TRestUtil.Instance);
+  var restAux: TRestUtil := TRestUtil.Instance;
 
   aCEP := LimpaNumeros(aCEP);
 
   restAux.BaseURL := 'https://viacep.com.br/ws/' + aCEP + '/json';
-  restAux.Executar;
+  try
+    restAux.Executar;
 
-  var data: TJSONObject := restAux.Data as TJSONObject;
+    var data: TJSONObject := restAux.Data as TJSONObject;
 
-  if Assigned(data) then
-  begin
-    try
-      Result.logradouro := data.Values['logradouro'].Value;
-    except
-      on Exception do
-        Result.logradouro := '';
+    if Assigned(data) then
+    begin
+      try
+        try
+          Result.logradouro := data.Values['logradouro'].Value;
+        except
+          on Exception do
+            Result.logradouro := '';
+        end;
+        try
+          Result.bairro := data.Values['bairro'].Value;
+        except
+          on Exception do
+            Result.bairro := '';
+        end;
+        try
+          Result.uf := data.Values['uf'].Value;
+        except
+          on Exception do
+            Result.uf := '';
+        end;
+        try
+          Result.localidade := data.Values['localidade'].Value;
+        except
+          on Exception do
+            Result.localidade := '';
+        end;
+        try
+          Result.complemento := data.Values['complemento'].Value;
+        except
+          on Exception do
+            Result.complemento := '';
+        end;
+      finally
+        data.Free;
+      end;
     end;
-    try
-      Result.bairro := data.Values['bairro'].Value;
-    except
-      on Exception do
-        Result.bairro := '';
-    end;
-    try
-      Result.uf := data.Values['uf'].Value;
-    except
-      on Exception do
-        Result.uf := '';
-    end;
-    try
-      Result.localidade := data.Values['localidade'].Value;
-    except
-      on Exception do
-        Result.localidade := '';
-    end;
-    try
-      Result.complemento := data.Values['complemento'].Value;
-    except
-      on Exception do
-        Result.complemento := '';
-    end;
+  finally
+    restAux.Free;
   end;
 
 end;
@@ -114,7 +122,7 @@ begin
   inherited;
 end;
 
-class function TConsultaCEP.Instance: IConsultaCEP;
+class function TConsultaCEP.Instance: TConsultaCEP;
 begin
   Result := Self.Create;
 end;

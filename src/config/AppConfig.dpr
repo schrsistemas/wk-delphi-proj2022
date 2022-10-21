@@ -16,6 +16,9 @@ uses
 
 begin
   Application.Initialize;
+{$IFDEF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+{$ENDIF}
   Application.MainFormOnTaskbar := True;
   TFrmCfgBD.ShowFrm;
   Application.Run;

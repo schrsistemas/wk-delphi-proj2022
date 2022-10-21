@@ -39,6 +39,7 @@ type
     SimpleAuthenticator1: TSimpleAuthenticator;
     procedure FormShow(Sender: TObject);
     procedure SBConsultarCEPClick(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -70,6 +71,16 @@ begin
     AddLog(e.StackTrace);
 end;
 
+procedure TFrmMenuServidor.FormDestroy(Sender: TObject);
+begin
+  if Assigned(DmSC) then
+    DmSC.Free;
+
+  if Assigned(DmBase) then
+    DmBase.Free;
+
+end;
+
 procedure TFrmMenuServidor.FormShow(Sender: TObject);
 begin
   InitComponents;
@@ -98,8 +109,11 @@ end;
 procedure TFrmMenuServidor.SBConsultarCEPClick(Sender: TObject);
 begin
   var classeCEP: TClasseCEP := TConsultaCEP.Instance.Consultar(edtCEP.Text);
-
-  mmoDadosCEP.Text := classeCEP.ToString;
+  try
+    mmoDadosCEP.Text := classeCEP.ToString;
+  finally
+    classeCEP.Free;
+  end;
 
 end;
 

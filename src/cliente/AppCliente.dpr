@@ -13,6 +13,9 @@ uses
 
 begin
   Application.Initialize;
+{$IFDEF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+{$ENDIF}
   Application.CreateForm(TFrmMenuCliente, FrmMenuCliente);
   Application.CreateForm(TDmControle, DmControle);
   Application.Run;

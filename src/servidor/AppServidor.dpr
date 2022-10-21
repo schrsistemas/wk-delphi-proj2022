@@ -21,6 +21,9 @@ uses
 
 begin
   Application.Initialize;
+{$IFDEF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+{$ENDIF}
   Application.CreateForm(TFrmMenuServidor, FrmMenuServidor);
   Application.Run;
 end.

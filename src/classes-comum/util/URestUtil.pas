@@ -30,9 +30,9 @@ type
     procedure SetBaseURL(const Value: string);
     function GetData: TJSONValue;
   public
-    constructor Create; overload;
-    destructor Destroy; overload;
-    class function Instance: IRestUtil;
+    constructor Create;
+    destructor Destroy; override;
+    class function Instance: TRestUtil;
 
     function Executar: Boolean;
 
@@ -60,14 +60,9 @@ end;
 
 destructor TRestUtil.Destroy;
 begin
+
   if Assigned(FRESTClient) then
     FRESTClient.Free;
-
-  if Assigned(FRESTRequest) then
-    FRESTRequest.Free;
-
-  if Assigned(FRESTResponse) then
-    FRESTResponse.Free;
 
   if Assigned(FSimpleAuthenticator) then
     FSimpleAuthenticator.Free;
@@ -119,7 +114,7 @@ begin
 
 end;
 
-class function TRestUtil.Instance: IRestUtil;
+class function TRestUtil.Instance: TRestUtil;
 begin
   Result := Self.Create;
 end;
