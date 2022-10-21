@@ -8,10 +8,18 @@ Estrutura de pastas
 \db -- Base de Dados: DDL
 \doc -- Documentação do Projeto
 
+\bin -- Executáveis do Projeto
+
 
 Tecnologias utilizadas
 
 - Delphi Rio // Desenvolvimento da aplicação
 - PostgreSQL // Gerenciador de Banco de Dados
+
+
+Link's de referencia:
+
+https://www.postgresql.org/ftp/odbc/versions/dll/
+https://www.enterprisedb.com/download-postgresql-binaries
 
 

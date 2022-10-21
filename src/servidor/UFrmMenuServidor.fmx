@@ -1,0 +1,61 @@
+object FrmMenuServidor: TFrmMenuServidor
+  Left = 0
+  Top = 0
+  Caption = 'Menu : Servidor'
+  ClientHeight = 500
+  ClientWidth = 778
+  Position = ScreenCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object LytContainer: TLayout
+    Align = Client
+    Size.Width = 778.000000000000000000
+    Size.Height = 500.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object tbcMenu: TTabControl
+      Align = Client
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Size.Width = 770.000000000000000000
+      Size.Height = 492.000000000000000000
+      Size.PlatformDefault = False
+      TabIndex = 0
+      TabOrder = 0
+      TabPosition = PlatformDefault
+      Sizes = (
+        770s
+        466s
+        770s
+        466s)
+      object tbtmMenu: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 51.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Menu'
+      end
+      object tbtmLog: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 40.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Log'
+      end
+    end
+  end
+end

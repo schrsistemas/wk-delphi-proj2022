@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{12B8C445-B4D4-48F7-943A-F8E32926615E}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="cliente\AppCliente.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="servidor\AppServidor.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="config\AppConfig.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AppCliente">
+        <MSBuild Projects="cliente\AppCliente.dproj"/>
+    </Target>
+    <Target Name="AppCliente:Clean">
+        <MSBuild Projects="cliente\AppCliente.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AppCliente:Make">
+        <MSBuild Projects="cliente\AppCliente.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AppServidor">
+        <MSBuild Projects="servidor\AppServidor.dproj"/>
+    </Target>
+    <Target Name="AppServidor:Clean">
+        <MSBuild Projects="servidor\AppServidor.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AppServidor:Make">
+        <MSBuild Projects="servidor\AppServidor.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AppConfig">
+        <MSBuild Projects="config\AppConfig.dproj"/>
+    </Target>
+    <Target Name="AppConfig:Clean">
+        <MSBuild Projects="config\AppConfig.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AppConfig:Make">
+        <MSBuild Projects="config\AppConfig.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AppCliente;AppServidor;AppConfig"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AppCliente:Clean;AppServidor:Clean;AppConfig:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AppCliente:Make;AppServidor:Make;AppConfig:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
