@@ -9,8 +9,8 @@ uses
   UControle.ClasseCfgDB in '..\classes-comum\controle\UControle.ClasseCfgDB.pas',
   UDAO.ClasseCfgDB in '..\classes-comum\dao\UDAO.ClasseCfgDB.pas',
   UClasseCfgDB in '..\classes-comum\negocio\UClasseCfgDB.pas',
-  UConstantes in '..\classes-comum\UConstantes.pas',
-  UDmBase in '..\servidor\UDmBase.pas' {DmBase: TDataModule};
+  UDmBase in '..\servidor\UDmBase.pas' {DmBase: TDataModule},
+  UConstantes in '..\classes-comum\util\UConstantes.pas';
 
 {$R *.res}
 

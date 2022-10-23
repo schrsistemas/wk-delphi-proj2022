@@ -8,6 +8,8 @@ object FrmMenuCliente: TFrmMenuCliente
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
   object LytContainer: TLayout
     Align = Client
@@ -24,23 +26,114 @@ object FrmMenuCliente: TFrmMenuCliente
       Size.Width = 632.000000000000000000
       Size.Height = 472.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
+        632s
+        446s
+        632s
+        446s
+        632s
+        446s
+        632s
+        446s
         632s
         446s)
       object tbtmMenu: TTabItem
         CustomIcon = <
           item
           end>
-        IsSelected = True
-        Size.Width = 77.000000000000000000
+        IsSelected = False
+        Size.Width = 51.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
-        Text = 'tbtmMenu'
+        Text = 'Menu'
+        ExplicitSize.cx = 77.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
+        object lblInfo: TLabel
+          Position.X = 192.000000000000000000
+          Position.Y = 150.000000000000000000
+          Size.Width = 209.000000000000000000
+          Size.Height = 91.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Teste aplica'#231#227'o cliente'
+          TabOrder = 0
+        end
+      end
+      object tbtmConsulta: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 67.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Consulta'
+      end
+      object tbtmCadastro: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 68.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Cadastro'
+        object btnEfetuarCadastro: TSpeedButton
+          Align = Client
+          Size.Width = 632.000000000000000000
+          Size.Height = 446.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Efetuar Cadastro'
+          OnClick = btnEfetuarCadastroClick
+        end
+      end
+      object tbtmImporta: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 81.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Importa'#231#227'o'
+        object btnImportarDados: TSpeedButton
+          Position.X = 56.000000000000000000
+          Position.Y = 38.000000000000000000
+          Size.Width = 161.000000000000000000
+          Size.Height = 83.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Importar Dados'
+        end
+      end
+      object tbtmExporta: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = False
+        Size.Width = 79.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Exporta'#231#227'o'
+        object btnExportarDados: TSpeedButton
+          Position.X = 64.000000000000000000
+          Position.Y = 46.000000000000000000
+          Size.Width = 161.000000000000000000
+          Size.Height = 83.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Exportar Dados'
+        end
       end
     end
   end

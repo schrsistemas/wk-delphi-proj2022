@@ -12,7 +12,7 @@ uses
   FMX.TabControl, URestUtil, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Edit,
   FMX.Controls.Presentation, System.DateUtils, UConstantes, UConsultaCEP,
   REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, REST.Client,
-  REST.Authenticator.Simple;
+  REST.Authenticator.Simple, FMX.Memo.Types;
 
 type
   TFrmMenuServidor = class(TForm)
@@ -33,16 +33,20 @@ type
     SBStop: TSpeedButton;
     LblStatusDB: TLabel;
     mmoLog: TMemo;
-    RESTClient1: TRESTClient;
-    RESTRequest1: TRESTRequest;
-    RESTResponse1: TRESTResponse;
-    SimpleAuthenticator1: TSimpleAuthenticator;
+    tmrMonitoraServidor: TTimer;
+    lblMonitorTarefas: TLabel;
+    lblServidorRest: TLabel;
     procedure FormShow(Sender: TObject);
     procedure SBConsultarCEPClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure SBStartClick(Sender: TObject);
+    procedure SBStopClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure tmrMonitoraServidorTimer(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
+    procedure SetDisplayStatus;
   public
     { Public declarations }
     procedure AddLog(texto: string); overload;
@@ -69,6 +73,12 @@ begin
   AddLog(e.Message);
   if e.StackTrace <> EmptyStr then
     AddLog(e.StackTrace);
+end;
+
+procedure TFrmMenuServidor.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  DmSC.PararServidor;
+  DmSC.PararMonitorTarefas;
 end;
 
 procedure TFrmMenuServidor.FormDestroy(Sender: TObject);
@@ -99,6 +109,9 @@ begin
     if TDmBase.CreateDm then
       LblStatusDB.Text := 'Status DB = Conectado!';
   {$ENDREGION}
+
+    DmSC.IniciarMonitorTarefas;
+
   except
     on e: Exception do
       AddLog(e);
@@ -114,6 +127,31 @@ begin
   finally
     classeCEP.Free;
   end;
+
+end;
+
+procedure TFrmMenuServidor.SBStartClick(Sender: TObject);
+begin
+  DmSC.IniciarServidor;
+
+end;
+
+procedure TFrmMenuServidor.SBStopClick(Sender: TObject);
+begin
+  DmSC.PararServidor;
+end;
+
+procedure TFrmMenuServidor.SetDisplayStatus;
+begin
+  lblMonitorTarefas.Text := DmSC.StatusMonitorTarefas;
+
+  lblServidorRest.Text := DmSC.StatusServidor;
+
+end;
+
+procedure TFrmMenuServidor.tmrMonitoraServidorTimer(Sender: TObject);
+begin
+  SetDisplayStatus;
 
 end;
 

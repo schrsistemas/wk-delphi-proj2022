@@ -1,0 +1,19 @@
+object FrmCadPessoa: TFrmCadPessoa
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 360
+  ClientWidth = 519
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object lytContainer: TLayout
+    Align = Client
+    Size.Width = 519.000000000000000000
+    Size.Height = 360.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+  end
+end

@@ -7,8 +7,8 @@ unit URestUtil;
 interface
 
 uses
-  System.JSON, Vcl.Dialogs, Vcl.StdCtrls, FireDAC.Comp.Client, System.Classes,
-  REST.Client, IPPeerClient, System.SysUtils, REST.Authenticator.Simple;
+  System.JSON, FireDAC.Comp.Client, System.Classes, REST.Client, IPPeerClient,
+  System.SysUtils, REST.Authenticator.Simple;
 
 type
   IRestUtil = interface

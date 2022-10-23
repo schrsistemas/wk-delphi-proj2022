@@ -7,7 +7,15 @@ uses
   System.StartUpCopy,
   FMX.Forms,
   UFrmMenuCliente in 'UFrmMenuCliente.pas' {FrmMenuCliente},
-  UDmControle in 'UDmControle.pas' {DmControle: TDataModule};
+  UDmControle in 'UDmControle.pas' {DmControle: TDataModule},
+  UICadastro in '..\classes-comum\interfaces\UICadastro.pas',
+  UClasse.Pessoa in '..\classes-comum\negocio\UClasse.Pessoa.pas',
+  UClasse.Endereco in '..\classes-comum\negocio\UClasse.Endereco.pas',
+  UFrmCadPessoa in 'visao\UFrmCadPessoa.pas' {FrmCadPessoa},
+  UConsultaCEP in '..\classes-comum\util\UConsultaCEP.pas',
+  URestUtil in '..\classes-comum\util\URestUtil.pas',
+  UFuncoes.Texto in '..\classes-comum\util\UFuncoes.Texto.pas',
+  UControle.Service.Pessoa in 'controle\UControle.Service.Pessoa.pas';
 
 {$R *.res}
 
@@ -17,6 +25,5 @@ begin
   ReportMemoryLeaksOnShutdown := True;
 {$ENDIF}
   Application.CreateForm(TFrmMenuCliente, FrmMenuCliente);
-  Application.CreateForm(TDmControle, DmControle);
   Application.Run;
 end.
