@@ -25,6 +25,7 @@ type
     procedure btnEfetuarCadastroClick(Sender: TObject);
   private
     { Private declarations }
+    procedure InitComponents;
   public
     { Public declarations }
   end;
@@ -47,7 +48,7 @@ end;
 
 procedure TFrmMenuCliente.FormCreate(Sender: TObject);
 begin
-  TDmControle.CreateDm;
+  InitComponents;
 end;
 
 procedure TFrmMenuCliente.FormDestroy(Sender: TObject);
@@ -57,4 +58,13 @@ begin
 
 end;
 
+procedure TFrmMenuCliente.InitComponents;
+begin
+  TDmControle.CreateDm;
+
+  tbcContainer.TabIndex := 0;
+
+end;
+
 end.
+
