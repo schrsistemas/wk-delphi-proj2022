@@ -6,7 +6,8 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   UClasse.Endereco, UClasse.Pessoa, FMX.Objects, FMX.Controls.Presentation,
-  FMX.StdCtrls, FMX.Edit, FMX.ComboEdit, FMX.DateTimeCtrls;
+  FMX.StdCtrls, FMX.Edit, FMX.ComboEdit, FMX.DateTimeCtrls, UConsultaCEP,
+  UFuncoes.Texto, UControle.Service.Pessoa, URestUtil, UDmControle;
 
 type
   TFrmCadPessoa = class(TForm)
@@ -23,16 +24,16 @@ type
     SBClose: TSpeedButton;
     Layout1: TLayout;
     Label1: TLabel;
-    Edit1: TEdit;
+    edtId: TEdit;
     Layout3: TLayout;
     Label2: TLabel;
-    Edit2: TEdit;
+    edtNomeSecundario: TEdit;
     Layout4: TLayout;
     Label3: TLabel;
-    Edit3: TEdit;
+    edtNomeRazao: TEdit;
     Layout5: TLayout;
     Label4: TLabel;
-    Edit4: TEdit;
+    edtDocumento: TEdit;
     Layout6: TLayout;
     Label5: TLabel;
     CmbNatureza: TComboEdit;
@@ -84,20 +85,74 @@ var
 
 implementation
 
-uses
-  UConsultaCEP;
-
 {$R *.fmx}
 
 { TFrmCadPessoa }
 
 function TFrmCadPessoa.GetValues: Boolean;
 begin
+  if FId > 0 then
+  begin
+    FPessoa := TServPessoa.BuscarPessoa(FId);
+  end
+  else
+  begin
+    FPessoa := TPessoa.Create;
+  end;
+
+  with FPessoa do
+  begin
+    edtId.Text := IntToStr(idpessoa);
+    CmbNatureza.ItemIndex := Integer(flnatureza);
+    edtDocumento.Text := dsdocumento;
+    edtNomeRazao.Text := nmprimeiro;
+    edtNomeSecundario.Text := nmsegundo;
+    EdtDataRegistro.Date := dtregistro;
+
+    with endereco do
+    begin
+      edtCEP.Text := dscep;
+    end;
+
+    with enderecoIntegracao do
+    begin
+      edtCidade.Text := nmcidade;
+      edtUF.Text := dsuf;
+      edtBairro.Text := nmbairro;
+      edtLogradouro.Text := nmlogradouro;
+      edtComplemento.Text := dscomplemento;
+    end;
+
+  end;
 
 end;
 
 function TFrmCadPessoa.SetValues: Boolean;
 begin
+  with FPessoa do
+  begin
+    idpessoa := StrToIntDef(edtId.Text, 0);
+    flnatureza := TNatureza(CmbNatureza.ItemIndex);
+    dsdocumento := edtDocumento.Text;
+    nmprimeiro := edtNomeRazao.Text;
+    nmsegundo := edtNomeSecundario.Text;
+    dtregistro := EdtDataRegistro.Date;
+
+    with endereco do
+    begin
+      dscep := edtCEP.Text;
+    end;
+
+    with enderecoIntegracao do
+    begin
+      nmcidade := edtCidade.Text;
+      dsuf := edtUF.Text;
+      nmbairro := edtBairro.Text;
+      nmlogradouro := edtLogradouro.Text;
+      dscomplemento := edtComplemento.Text;
+    end;
+
+  end;
 
 end;
 
@@ -105,6 +160,10 @@ class function TFrmCadPessoa.ShowFrm(value: Integer): Boolean;
 begin
   FrmCadPessoa := TFrmCadPessoa.Create(nil);
   try
+    FrmCadPessoa.Id := value;
+
+    FrmCadPessoa.GetValues;
+
     FrmCadPessoa.ShowModal;
   finally
     FrmCadPessoa.Free;
@@ -119,6 +178,20 @@ end;
 
 procedure TFrmCadPessoa.LocalizarCEP;
 begin
+  if edtCEP.Text <> '' then
+  begin
+    var auxCep: TClasseCEP := TConsultaCEP.Instance.Consultar(edtCEP.Text);
+
+    with auxCep do
+    begin
+      edtCEP.Text := cep;
+      edtLogradouro.Text := logradouro;
+      edtBairro.Text := bairro;
+      edtCidade.Text := localidade;
+      edtUF.Text := uf;
+    end;
+
+  end;
 
 end;
 

@@ -36,6 +36,8 @@ type
     tmrMonitoraServidor: TTimer;
     lblMonitorTarefas: TLabel;
     lblServidorRest: TLabel;
+    grpTesteDAO: TGroupBox;
+    SBGeraRegistroDB: TSpeedButton;
     procedure FormShow(Sender: TObject);
     procedure SBConsultarCEPClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -43,6 +45,7 @@ type
     procedure SBStopClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tmrMonitoraServidorTimer(Sender: TObject);
+    procedure SBGeraRegistroDBClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -59,7 +62,7 @@ var
 implementation
 
 uses
-  UDmSC, UDmBase;
+  UDmSC, UDmBase, UControle.ClassePessoa, UClasse.Pessoa;
 
 {$R *.fmx}
 
@@ -101,7 +104,7 @@ begin
   try
   {$REGION 'Rest Server'}
     TDmSC.CreateDm;
-    edtPorta.Text := PORTA_REST_SERVER;
+    edtPorta.Text := IntToStr(PORTA_REST_SERVER);
   {$ENDREGION}
 
   {$REGION 'Acesso DB'}
@@ -127,6 +130,15 @@ begin
   finally
     classeCEP.Free;
   end;
+
+end;
+
+procedure TFrmMenuServidor.SBGeraRegistroDBClick(Sender: TObject);
+begin
+  var auxPessoa: TPessoa := TPessoa.Create;
+  var cPessoa := TControlePessoa.Create;
+
+  cPessoa.Gravar(auxPessoa)
 
 end;
 

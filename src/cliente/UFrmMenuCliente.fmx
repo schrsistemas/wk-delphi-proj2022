@@ -26,7 +26,7 @@ object FrmMenuCliente: TFrmMenuCliente
       Size.Width = 913.000000000000000000
       Size.Height = 600.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 5
+      TabIndex = 3
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -106,7 +106,7 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 81.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -117,10 +117,36 @@ object FrmMenuCliente: TFrmMenuCliente
         ExplicitSize.cy = 26.000000000000000000
         object btnImportarDados: TSpeedButton
           Align = Client
+          StyledSettings = [Family, FontColor]
           Size.Width = 913.000000000000000000
-          Size.Height = 574.000000000000000000
+          Size.Height = 360.000000000000000000
           Size.PlatformDefault = False
           Text = 'Importar Dados'
+          TextSettings.Font.Size = 16.000000000000000000
+          OnClick = btnImportarDadosClick
+        end
+        object mmoExemploImp: TMemo
+          Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+          DataDetectorTypes = []
+          Lines.Strings = (
+            'Layout exemplo de Importa'#231#227'o:'
+            ''
+            
+              'CODIGO;NATUREZA;DOCUMENTO;NOME_RAZAO;NOME_SECUNDARIO;CEP;LOGRADO' +
+              'URO;BAIRRO;CIDADE;UF;COMPLEMENTO;'
+            '')
+          ReadOnly = True
+          StyledSettings = [Family, Size, FontColor]
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          Align = Bottom
+          Position.Y = 360.000000000000000000
+          Size.Width = 913.000000000000000000
+          Size.Height = 214.000000000000000000
+          Size.PlatformDefault = False
+          TabOrder = 9
+          TabStop = False
+          Viewport.Width = 909.000000000000000000
+          Viewport.Height = 210.000000000000000000
         end
       end
       object tbtmExporta: TTabItem
@@ -148,20 +174,22 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 55.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
         Text = 'Config'
+        ExplicitSize.cx = 55.000000000000000000
+        ExplicitSize.cy = 26.000000000000000000
         object grpConfigAcesso: TGroupBox
           Align = Center
           Size.Width = 329.000000000000000000
           Size.Height = 179.000000000000000000
           Size.PlatformDefault = False
           Text = 'Configura'#231#227'o de Acesso'
-          TabOrder = 3
+          TabOrder = 0
           object LblURL: TLabel
             Position.X = 24.000000000000000000
             Position.Y = 32.000000000000000000
@@ -237,5 +265,10 @@ object FrmMenuCliente: TFrmMenuCliente
         end
       end
     end
+  end
+  object dlgOpen: TOpenDialog
+    Filter = 'Arquivos CSV (*.CSV)|*.CSV'
+    Left = 592
+    Top = 200
   end
 end

@@ -20,7 +20,8 @@ uses
   UConstantes in '..\classes-comum\util\UConstantes.pas',
   UControle.ClasseCfgAppCliente in '..\classes-comum\controle\UControle.ClasseCfgAppCliente.pas',
   UDAO.ClasseCfgAppCliente in '..\classes-comum\dao\UDAO.ClasseCfgAppCliente.pas',
-  USistema in '..\classes-comum\negocio\USistema.pas';
+  USistema in '..\classes-comum\negocio\USistema.pas',
+  UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas';
 
 {$R *.res}
 

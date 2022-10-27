@@ -4,7 +4,7 @@ interface
 
 uses
   UICadastro, System.DateUtils, System.SysUtils, System.Classes, System.JSON,
-  UClasse.Endereco;
+  UClasse.Endereco, UClasse.EnderecoIntegracao;
 
 {
 -- Pessoa
@@ -21,6 +21,8 @@ create table pessoa
 }
 
 type
+  TNatureza = (natCPF, natCNPJ);
+
   TPessoa = class(TInterfacedObject, iCadastro)
   private
     Fidpessoa: Integer;
@@ -29,17 +31,19 @@ type
     Fdtregistro: TDateTime;
     Fnmsegundo: string;
     Fdsdocumento: string;
-    Fflnatureza: Integer;
+    Fflnatureza: TNatureza;
+    FenderecoIntegracao: TEnderecoIntegracao;
   protected
   public
     property idpessoa: Integer read Fidpessoa write Fidpessoa;
-    property flnatureza: Integer read Fflnatureza write Fflnatureza;
+    property flnatureza: TNatureza read Fflnatureza write Fflnatureza;
     property dsdocumento: string read Fdsdocumento write Fdsdocumento;
     property nmprimeiro: string read Fnmprimeiro write Fnmprimeiro;
     property nmsegundo: string read Fnmsegundo write Fnmsegundo;
     property dtregistro: TDateTime read Fdtregistro write Fdtregistro;
 
     property endereco: TEndereco read Fendereco write Fendereco;
+    property enderecoIntegracao: TEnderecoIntegracao read FenderecoIntegracao write FenderecoIntegracao;
 
     constructor Create;
     destructor Destroy; override;
@@ -55,10 +59,18 @@ constructor TPessoa.Create;
 begin
   inherited;
 
+  Fdtregistro := Now;
+  endereco := TEndereco.Create;
+  enderecoIntegracao := TEnderecoIntegracao.Create;
+
 end;
 
 destructor TPessoa.Destroy;
 begin
+  if Assigned(endereco) then
+    endereco.Free;
+  if Assigned(enderecoIntegracao) then
+    enderecoIntegracao.Free;
 
   inherited;
 end;

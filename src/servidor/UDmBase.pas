@@ -28,7 +28,13 @@ type
     FDGUIxWaitCursor: TFDGUIxWaitCursor;
     FDMoniRemoteClientLink: TFDMoniRemoteClientLink;
   private
-    { Private declarations }
+  public
+    class function CreateDm: Boolean;
+    function Conectar(CfgDB: TClasseCfgDB): Boolean;
+    function DesConectar: Boolean;
+    function TestarConexao(CfgDB: TClasseCfgDB): Boolean;
+    procedure ConfigDm(dm: TDataModule);
+
     procedure FDScriptBeforeExecute(Sender: TObject);
     procedure FDScriptAfterExecute(Sender: TObject);
     procedure QueryAfterExecute(DataSet: TFDDataSet);
@@ -36,16 +42,11 @@ type
     procedure QueryBeforeExecute(DataSet: TFDDataSet);
     procedure QueryAfterPost(DataSet: TDataSet);
     procedure QueryAfterDelete(DataSet: TDataSet);
+
     procedure Commit;
     procedure Rollback;
     procedure StartTransaction;
-  public
-    { Public declarations }
-    class function CreateDm: Boolean;
-    function Conectar(CfgDB: TClasseCfgDB): Boolean;
-    function DesConectar: Boolean;
-    function TestarConexao(CfgDB: TClasseCfgDB): Boolean;
-    procedure ConfigDm(dm: TDataModule);
+
   end;
 
 var

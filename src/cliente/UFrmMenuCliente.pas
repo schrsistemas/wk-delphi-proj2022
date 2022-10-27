@@ -5,7 +5,8 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
-  FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, USistema;
+  FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, USistema,
+  UControle.Service.Pessoa, FMX.ScrollBox, FMX.Memo;
 
 type
   TFrmMenuCliente = class(TForm)
@@ -28,11 +29,14 @@ type
     edtServidor: TEdit;
     Label1: TLabel;
     edtPorta: TEdit;
+    dlgOpen: TOpenDialog;
+    mmoExemploImp: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnEfetuarCadastroClick(Sender: TObject);
     procedure SBTestarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure btnImportarDadosClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -53,6 +57,16 @@ uses
 procedure TFrmMenuCliente.btnEfetuarCadastroClick(Sender: TObject);
 begin
   TFrmCadPessoa.ShowFrm(0);
+
+end;
+
+procedure TFrmMenuCliente.btnImportarDadosClick(Sender: TObject);
+begin
+  dlgOpen.InitialDir := ExtractFilePath(ParamStr(0));
+  if dlgOpen.Execute then
+  begin
+    TServPessoa.ImportarListaPessoas(dlgOpen.FileName);
+  end;
 
 end;
 

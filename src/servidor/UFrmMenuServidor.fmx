@@ -27,7 +27,7 @@ object FrmMenuServidor: TFrmMenuServidor
       Size.Width = 748.000000000000000000
       Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -41,7 +41,7 @@ object FrmMenuServidor: TFrmMenuServidor
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 51.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -57,7 +57,7 @@ object FrmMenuServidor: TFrmMenuServidor
           Size.Height = 75.000000000000000000
           Size.PlatformDefault = False
           Text = 'Servidor'
-          TabOrder = 11
+          TabOrder = 1
           object LblPorta: TLabel
             StyledSettings = [Family, FontColor]
             Position.X = 56.000000000000000000
@@ -117,7 +117,7 @@ object FrmMenuServidor: TFrmMenuServidor
           TextSettings.Font.Size = 18.000000000000000000
           TextSettings.FontColor = claRed
           Text = 'LblStatusDB'
-          TabOrder = 5
+          TabOrder = 0
         end
         object lblMonitorTarefas: TLabel
           StyledSettings = [Family, Style]
@@ -129,7 +129,7 @@ object FrmMenuServidor: TFrmMenuServidor
           TextSettings.Font.Size = 18.000000000000000000
           TextSettings.FontColor = claNavy
           Text = 'Status Monitor Tarefas'
-          TabOrder = 4
+          TabOrder = 2
         end
         object lblServidorRest: TLabel
           StyledSettings = [Family, Style]
@@ -173,7 +173,7 @@ object FrmMenuServidor: TFrmMenuServidor
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 41.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -230,6 +230,28 @@ object FrmMenuServidor: TFrmMenuServidor
             Size.PlatformDefault = False
             Text = 'CEP:'
             TabOrder = 2
+          end
+        end
+        object grpTesteDAO: TGroupBox
+          Align = Top
+          Margins.Left = 8.000000000000000000
+          Margins.Top = 8.000000000000000000
+          Margins.Right = 8.000000000000000000
+          Margins.Bottom = 8.000000000000000000
+          Position.X = 8.000000000000000000
+          Position.Y = 124.000000000000000000
+          Size.Width = 732.000000000000000000
+          Size.Height = 100.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Teste Persist'#234'ncia DB'
+          TabOrder = 1
+          object SBGeraRegistroDB: TSpeedButton
+            Align = Center
+            Size.Width = 276.000000000000000000
+            Size.Height = 57.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Gerar Registros em Base (Pessoas)'
+            OnClick = SBGeraRegistroDBClick
           end
         end
       end

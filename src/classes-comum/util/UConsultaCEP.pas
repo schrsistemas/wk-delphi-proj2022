@@ -61,6 +61,8 @@ begin
 
   aCEP := LimpaNumeros(aCEP);
 
+  Result.cep := aCEP;
+
   restAux.BaseURL := 'https://viacep.com.br/ws/' + aCEP + '/json';
   try
     restAux.Executar;

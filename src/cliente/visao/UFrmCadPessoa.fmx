@@ -94,7 +94,7 @@ object FrmCadPessoa: TFrmCadPessoa
           Text = 'C'#243'digo:'
           TabOrder = 0
         end
-        object Edit1: TEdit
+        object edtId: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Left
           TabOrder = 1
@@ -160,7 +160,7 @@ object FrmCadPessoa: TFrmCadPessoa
           Text = 'Nome.Secund'#225'rio:'
           TabOrder = 0
         end
-        object Edit2: TEdit
+        object edtNomeSecundario: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Left
           TabOrder = 1
@@ -197,7 +197,7 @@ object FrmCadPessoa: TFrmCadPessoa
           Text = 'Nome.Raz'#227'o:'
           TabOrder = 0
         end
-        object Edit3: TEdit
+        object edtNomeRazao: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Left
           TabOrder = 1
@@ -234,7 +234,7 @@ object FrmCadPessoa: TFrmCadPessoa
           Text = 'Documento:'
           TabOrder = 0
         end
-        object Edit4: TEdit
+        object edtDocumento: TEdit
           Touch.InteractiveGestures = [LongTap, DoubleTap]
           Align = Left
           TabOrder = 1

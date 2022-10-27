@@ -15,41 +15,20 @@ create table endereco (
 	constraint endereco_fk_pessoa foreign key (idpessoa) references pessoa (idpessoa) on delete cascade
 );
 
--- Endereco Integracao
-create table endereco_integracao (
-	idendereco bigint not null,
-	dsuf varchar(50) null,
-	nmcidade varchar(100) null,
-	nmbairro varchar(50) null,
-	nmlogradouro varchar(100) null,
-	dscomplemento varchar(100) null,
-	constraint enderecointegracao_pk primary key (idendereco),
-	constraint enderecointegracao_fk_endereco foreign key (idendereco) references endereco (idendereco) on delete cascade
-);
 }
 
 type
   TEndereco = class(TInterfacedObject, iCadastro)
   private
     Fidendereco: Integer;
-    Fcep: string;
-    Fdsuf: string;
-    Fnmcidade: string;
-    Fnmlogradouro: string;
-    Fnmbairro: string;
-    Fdscomplemento: string;
+    Fdscep: string;
     Fidpessoa: Integer;
+
   protected
   public
     property idendereco: Integer read Fidendereco write Fidendereco;
     property idpessoa: Integer read Fidpessoa write Fidpessoa;
-    property cep: string read Fcep write Fcep;
-
-    property dsuf: string read Fdsuf write Fdsuf;
-    property nmcidade: string read Fnmcidade write Fnmcidade;
-    property nmbairro: string read Fnmbairro write Fnmbairro;
-    property nmlogradouro: string read Fnmlogradouro write Fnmlogradouro;
-    property dscomplemento: string read Fdscomplemento write Fdscomplemento;
+    property dscep: string read Fdscep write Fdscep;
 
     constructor Create;
     destructor Destroy; override;

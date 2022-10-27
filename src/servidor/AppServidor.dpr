@@ -22,7 +22,11 @@ uses
   UDao.ClassePessoa in '..\classes-comum\dao\UDao.ClassePessoa.pas',
   UDao.ClasseEndereco in '..\classes-comum\dao\UDao.ClasseEndereco.pas',
   UDao.ClasseEnderecoIntegracao in '..\classes-comum\dao\UDao.ClasseEnderecoIntegracao.pas',
-  UControle.ClassePessoa in '..\classes-comum\controle\UControle.ClassePessoa.pas';
+  UControle.ClassePessoa in '..\classes-comum\controle\UControle.ClassePessoa.pas',
+  UIDAO in '..\classes-comum\interfaces\UIDAO.pas',
+  UDAO in '..\classes-comum\dao\UDAO.pas',
+  UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas',
+  UClasseRepostaOp in '..\classes-comum\negocio\UClasseRepostaOp.pas';
 
 {$R *.res}
 
