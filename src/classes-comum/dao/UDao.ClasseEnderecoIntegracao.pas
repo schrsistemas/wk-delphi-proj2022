@@ -19,31 +19,46 @@ type
   TDAOEnderecoIntegracao = class(TDAO, IDAOEnderecoIntegracao)
   private
   public
-    function Get(aID: Integer): TResposta;
+    function Get(aID: Integer): TObject;
     function Gravar(aObj: TObject): TResposta;
-    function Atualizar(aObj: TObject): TResposta;
     function Listar(): TObjectList<TObject>; overload;
     function Listar(Campo: string; Value: Variant): TObjectList<TObject>; overload;
-    function Deletar(aID: Integer): Boolean;
   end;
 
 implementation
 
 { TDAOEnderecoIntegracao }
 
-function TDAOEnderecoIntegracao.Atualizar(aObj: TObject): TResposta;
+function TDAOEnderecoIntegracao.Get(aID: Integer): TObject;
 begin
+  Result := TEnderecoIntegracao.Create;
 
-end;
+  try
+    Query := GeraQuery('SELECT idendereco, dsuf, nmcidade, nmbairro, nmlogradouro, dscomplemento FROM endereco_integracao WHERE idendereco = :pe_idendereco;');
 
-function TDAOEnderecoIntegracao.Deletar(aID: Integer): Boolean;
-begin
+    Query.Close;
+    Query.ParamByName('pe_idendereco').AsInteger := TEnderecoIntegracao(Result).idEndereco;
+    Query.Open;
 
-end;
+    try
 
-function TDAOEnderecoIntegracao.Get(aID: Integer): TResposta;
-begin
+      TEnderecoIntegracao(Result).idEndereco := Query.FieldByName('idendereco').AsInteger;
+      TEnderecoIntegracao(Result).dsuf := Query.FieldByName('dsuf').AsString;
+      TEnderecoIntegracao(Result).nmcidade := Query.FieldByName('nmcidade').AsString;
+      TEnderecoIntegracao(Result).nmbairro := Query.FieldByName('nmbairro').AsString;
+      TEnderecoIntegracao(Result).nmlogradouro := Query.FieldByName('nmlogradouro').AsString;
+      TEnderecoIntegracao(Result).dscomplemento := Query.FieldByName('dscomplemento').AsString;
 
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
 end;
 
 function TDAOEnderecoIntegracao.Gravar(aObj: TObject): TResposta;
@@ -96,12 +111,15 @@ end;
 
 function TDAOEnderecoIntegracao.Listar(Campo: string; Value: Variant): TObjectList<TObject>;
 begin
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 
 end;
 
 function TDAOEnderecoIntegracao.Listar: TObjectList<TObject>;
 begin
-
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 end;
 
 end.

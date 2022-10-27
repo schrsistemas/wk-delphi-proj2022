@@ -138,7 +138,9 @@ begin
   var auxPessoa: TPessoa := TPessoa.Create;
   var cPessoa := TControlePessoa.Create;
 
-  cPessoa.Gravar(auxPessoa)
+  cPessoa.Gravar(auxPessoa);
+
+  cPessoa.Get(1);
 
 end;
 

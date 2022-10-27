@@ -19,30 +19,43 @@ type
   TDAOEndereco = class(TDAO, IDAOEndereco)
   private
   public
-    function Get(aID: Integer): TResposta;
+    function Get(aID: Integer): TObject;
     function Gravar(aObj: TObject): TResposta;
-    function Atualizar(aObj: TObject): TResposta;
     function Listar(): TObjectList<TObject>; overload;
     function Listar(Campo: string; Value: Variant): TObjectList<TObject>; overload;
-    function Deletar(aID: Integer): Boolean;
   end;
 
 implementation
 
 { TDAOEndereco }
 
-function TDAOEndereco.Atualizar(aObj: TObject): TResposta;
+function TDAOEndereco.Get(aID: Integer): TObject;
 begin
+  Result := TEndereco.Create;
 
-end;
+  try
+    Query := GeraQuery('SELECT idendereco, idpessoa, dscep FROM endereco WHERE idpessoa = :pe_idpessoa;');
 
-function TDAOEndereco.Deletar(aID: Integer): Boolean;
-begin
+    Query.Close;
+    Query.ParamByName('pe_idpessoa').AsInteger := aID;
+    Query.Open;
 
-end;
+    try
 
-function TDAOEndereco.Get(aID: Integer): TResposta;
-begin
+      TEndereco(Result).idpessoa := Query.FieldByName('idpessoa').AsInteger;
+      TEndereco(Result).idendereco := Query.FieldByName('idendereco').AsInteger;
+      TEndereco(Result).dscep := Query.FieldByName('dscep').AsString;
+
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
 
 end;
 
@@ -95,11 +108,15 @@ end;
 
 function TDAOEndereco.Listar: TObjectList<TObject>;
 begin
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 
 end;
 
 function TDAOEndereco.Listar(Campo: string; Value: Variant): TObjectList<TObject>;
 begin
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 
 end;
 

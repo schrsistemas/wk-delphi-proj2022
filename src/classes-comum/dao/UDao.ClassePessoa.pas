@@ -19,7 +19,7 @@ type
   TDAOPessoa = class(TDAO, IDAOPessoa)
   private
   public
-    function Get(aID: Integer): TResposta;
+    function Get(aID: Integer): TObject;
     function Gravar(aObj: TObject): TResposta;
     function Atualizar(aObj: TObject): TResposta;
     function Listar(): TObjectList<TObject>; overload;
@@ -33,17 +33,65 @@ implementation
 
 function TDAOPessoa.Atualizar(aObj: TObject): TResposta;
 begin
-
+  Result := Gravar(aObj);
 end;
 
 function TDAOPessoa.Deletar(aID: Integer): Boolean;
 begin
+  Result := False;
+  Query := GeraQuery('DELETE FROM pessoa WHERE idpessoa = :pe_id;');
+
+  try
+    Query.Close;
+    Query.ParamByName('pe_id').AsInteger := aID;
+    Query.Open;
+
+    try
+      Query.Delete;
+      Result := True;
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
 
 end;
 
-function TDAOPessoa.Get(aID: Integer): TResposta;
+function TDAOPessoa.Get(aID: Integer): TObject;
 begin
+  Result := TPessoa.Create;
 
+  Query := GeraQuery('SELECT idpessoa, flnatureza, dsdocumento, nmprimeiro, nmsegundo, dtregistro FROM pessoa WHERE idpessoa = :pe_id;');
+
+  try
+    Query.Close;
+    Query.ParamByName('pe_id').AsInteger := aID;
+    Query.Open;
+
+    try
+
+      TPessoa(Result).idpessoa := Query.FieldByName('idpessoa').AsInteger;
+      TPessoa(Result).flnatureza := TNatureza(Query.FieldByName('flnatureza').AsInteger);
+      TPessoa(Result).dsdocumento := Query.FieldByName('dsdocumento').AsString;
+      TPessoa(Result).nmprimeiro := Query.FieldByName('nmprimeiro').AsString;
+      TPessoa(Result).nmsegundo := Query.FieldByName('nmsegundo').AsString;
+      TPessoa(Result).dtregistro := Query.FieldByName('dtregistro').AsDateTime;
+
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
 end;
 
 function TDAOPessoa.Gravar(aObj: TObject): TResposta;
@@ -99,11 +147,15 @@ end;
 
 function TDAOPessoa.Listar: TObjectList<TObject>;
 begin
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 
 end;
 
 function TDAOPessoa.Listar(Campo: string; Value: Variant): TObjectList<TObject>;
 begin
+  Result := TObjectList<TObject>.Create;
+  Result.Clear;
 
 end;
 

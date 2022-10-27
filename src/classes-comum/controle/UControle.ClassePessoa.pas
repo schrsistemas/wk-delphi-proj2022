@@ -21,7 +21,7 @@ type
   { public declarations }
     function Get(aID: Integer): TPessoa;
     function Gravar(aObj: TPessoa): TResposta;
-    function Atualizar(aObj: TPessoa): TPessoa;
+    function Atualizar(aObj: TPessoa): TResposta;
     function Listar(): TObjectList<TPessoa>; overload;
     function Listar(Campo: string; Value: Variant): TObjectList<TPessoa>; overload;
     function Deletar(aID: Integer): Boolean;
@@ -34,18 +34,27 @@ implementation
 
 { TControlePessoa }
 
-function TControlePessoa.Atualizar(aObj: TPessoa): TPessoa;
+function TControlePessoa.Atualizar(aObj: TPessoa): TResposta;
 begin
-
+  Result := Gravar(aObj);
 end;
 
 function TControlePessoa.Deletar(aID: Integer): Boolean;
 begin
-
+  var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
+  Result := DAOPessoa.Deletar(aID);
 end;
 
 function TControlePessoa.Get(aID: Integer): TPessoa;
 begin
+  var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
+  Result := TPessoa(DAOPessoa.Get(aID));
+
+  var DAOEndereco: TDAOEndereco := TDAOEndereco.Create;
+  Result.endereco := TEndereco(DAOEndereco.Get(aID));
+
+  var DAOEnderecoIntegracao: TDAOEnderecoIntegracao := TDAOEnderecoIntegracao.Create;
+  Result.enderecoIntegracao := TEnderecoIntegracao(DAOEnderecoIntegracao.Get(aID));
 
 end;
 
@@ -73,11 +82,15 @@ end;
 
 function TControlePessoa.Listar: TObjectList<TPessoa>;
 begin
+  Result := TObjectList<TPessoa>.Create;
+  Result.Clear;
 
 end;
 
 function TControlePessoa.Listar(Campo: string; Value: Variant): TObjectList<TPessoa>;
 begin
+  Result := TObjectList<TPessoa>.Create;
+  Result.Clear;
 
 end;
 
