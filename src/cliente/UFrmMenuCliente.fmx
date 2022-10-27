@@ -16,7 +16,7 @@ object FrmMenuCliente: TFrmMenuCliente
     Size.Width = 921.000000000000000000
     Size.Height = 608.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 2
+    TabOrder = 3
     object tbcContainer: TTabControl
       Align = Client
       Margins.Left = 4.000000000000000000
@@ -26,10 +26,12 @@ object FrmMenuCliente: TFrmMenuCliente
       Size.Width = 913.000000000000000000
       Size.Height = 600.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 2
-      TabOrder = 3
+      TabIndex = 5
+      TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
+        913s
+        574s
         913s
         574s
         913s
@@ -82,7 +84,7 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 68.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -140,6 +142,98 @@ object FrmMenuCliente: TFrmMenuCliente
           Size.Height = 574.000000000000000000
           Size.PlatformDefault = False
           Text = 'Exportar Dados'
+        end
+      end
+      object tbtmConfig: TTabItem
+        CustomIcon = <
+          item
+          end>
+        IsSelected = True
+        Size.Width = 55.000000000000000000
+        Size.Height = 26.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = ''
+        TabOrder = 0
+        Text = 'Config'
+        object grpConfigAcesso: TGroupBox
+          Align = Center
+          Size.Width = 329.000000000000000000
+          Size.Height = 179.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Configura'#231#227'o de Acesso'
+          TabOrder = 3
+          object LblURL: TLabel
+            Position.X = 24.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Trailing
+            Text = 'Servidor:'
+            TabOrder = 1
+          end
+          object SBTestar: TSpeedButton
+            Align = Bottom
+            StyledSettings = [Family, Style]
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 111.000000000000000000
+            Size.Width = 313.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Testar'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = claDarkgreen
+            OnClick = SBTestarClick
+          end
+          object SpeedButton1: TSpeedButton
+            Align = Bottom
+            StyledSettings = [Family]
+            Margins.Left = 8.000000000000000000
+            Margins.Top = 8.000000000000000000
+            Margins.Right = 8.000000000000000000
+            Margins.Bottom = 8.000000000000000000
+            Position.X = 8.000000000000000000
+            Position.Y = 149.000000000000000000
+            Size.Width = 313.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+            Text = 'Gravar'
+            TextSettings.Font.Size = 14.000000000000000000
+            TextSettings.FontColor = claDarkblue
+            OnClick = SpeedButton1Click
+          end
+          object edtServidor: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 2
+            Position.X = 104.000000000000000000
+            Position.Y = 32.000000000000000000
+            Size.Width = 193.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
+          object Label1: TLabel
+            Position.X = 24.000000000000000000
+            Position.Y = 64.000000000000000000
+            Size.Width = 73.000000000000000000
+            Size.Height = 17.000000000000000000
+            Size.PlatformDefault = False
+            TextSettings.HorzAlign = Trailing
+            Text = 'Porta:'
+            TabOrder = 3
+          end
+          object edtPorta: TEdit
+            Touch.InteractiveGestures = [LongTap, DoubleTap]
+            TabOrder = 4
+            Position.X = 104.000000000000000000
+            Position.Y = 64.000000000000000000
+            Size.Width = 65.000000000000000000
+            Size.Height = 22.000000000000000000
+            Size.PlatformDefault = False
+          end
         end
       end
     end

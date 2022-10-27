@@ -213,6 +213,11 @@
         <DCCReference Include="..\classes-comum\util\URestUtil.pas"/>
         <DCCReference Include="..\classes-comum\util\UFuncoes.Texto.pas"/>
         <DCCReference Include="controle\UControle.Service.Pessoa.pas"/>
+        <DCCReference Include="..\classes-comum\negocio\UClasseCfgAppCliente.pas"/>
+        <DCCReference Include="..\classes-comum\util\UConstantes.pas"/>
+        <DCCReference Include="..\classes-comum\controle\UControle.ClasseCfgAppCliente.pas"/>
+        <DCCReference Include="..\classes-comum\dao\UDAO.ClasseCfgAppCliente.pas"/>
+        <DCCReference Include="..\classes-comum\negocio\USistema.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

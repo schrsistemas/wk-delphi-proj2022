@@ -5,7 +5,7 @@ interface
 uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
-  FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls;
+  FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, USistema;
 
 type
   TFrmMenuCliente = class(TForm)
@@ -20,9 +20,19 @@ type
     btnImportarDados: TSpeedButton;
     btnExportarDados: TSpeedButton;
     btnEfetuarCadastro: TSpeedButton;
+    tbtmConfig: TTabItem;
+    grpConfigAcesso: TGroupBox;
+    LblURL: TLabel;
+    SBTestar: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    edtServidor: TEdit;
+    Label1: TLabel;
+    edtPorta: TEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnEfetuarCadastroClick(Sender: TObject);
+    procedure SBTestarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -56,6 +66,9 @@ begin
   if Assigned(DmControle) then
     DmControle.Free;
 
+  if Assigned(Sistema) then
+    Sistema.Free;
+
 end;
 
 procedure TFrmMenuCliente.InitComponents;
@@ -63,6 +76,25 @@ begin
   TDmControle.CreateDm;
 
   tbcContainer.TabIndex := 0;
+
+  Sistema := TSistema.Create;
+  Sistema.Init;
+
+  edtServidor.Text := Sistema.CfgAppCliente.Servidor;
+  edtPorta.Text := Sistema.CfgAppCliente.Porta.ToString;
+
+end;
+
+procedure TFrmMenuCliente.SBTestarClick(Sender: TObject);
+begin
+  raise Exception.Create('Não implementado!');
+
+end;
+
+procedure TFrmMenuCliente.SpeedButton1Click(Sender: TObject);
+begin
+  if Sistema.GravaConfigCfgCliente(edtServidor.Text, StrToIntDef(edtPorta.Text, 0)) then
+    ShowMessage('Configuração gravado com sucesso!');
 
 end;
 

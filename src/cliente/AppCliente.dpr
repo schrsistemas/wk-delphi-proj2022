@@ -15,7 +15,12 @@ uses
   UConsultaCEP in '..\classes-comum\util\UConsultaCEP.pas',
   URestUtil in '..\classes-comum\util\URestUtil.pas',
   UFuncoes.Texto in '..\classes-comum\util\UFuncoes.Texto.pas',
-  UControle.Service.Pessoa in 'controle\UControle.Service.Pessoa.pas';
+  UControle.Service.Pessoa in 'controle\UControle.Service.Pessoa.pas',
+  UClasseCfgAppCliente in '..\classes-comum\negocio\UClasseCfgAppCliente.pas',
+  UConstantes in '..\classes-comum\util\UConstantes.pas',
+  UControle.ClasseCfgAppCliente in '..\classes-comum\controle\UControle.ClasseCfgAppCliente.pas',
+  UDAO.ClasseCfgAppCliente in '..\classes-comum\dao\UDAO.ClasseCfgAppCliente.pas',
+  USistema in '..\classes-comum\negocio\USistema.pas';
 
 {$R *.res}
 
