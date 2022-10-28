@@ -30,7 +30,8 @@ uses
   UClasseCfgAppServidor in '..\classes-comum\negocio\UClasseCfgAppServidor.pas',
   UControle.ClasseCfgAppServidor in '..\classes-comum\controle\UControle.ClasseCfgAppServidor.pas',
   UDmSC in 'UDmSC.pas' {DmSC: TDataModule},
-  UClasseServidor in 'UClasseServidor.pas';
+  UClasseServidor in 'UClasseServidor.pas',
+  UClasseServidor.Pessoa in 'UClasseServidor.Pessoa.pas';
 
 {$R *.res}
 

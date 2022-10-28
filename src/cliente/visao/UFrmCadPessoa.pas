@@ -172,6 +172,16 @@ end;
 
 function TFrmCadPessoa.ValidarCadastro: Boolean;
 begin
+  Result := False;
+
+  if Trim(edtDocumento.Text) = '' then
+    raise Exception.Create('Informe o Documento');
+
+  if Trim(edtNomeRazao.Text) = '' then
+    raise Exception.Create('Informe o Nome');
+
+  if Trim(edtCEP.Text) = '' then
+    raise Exception.Create('Informe o CEP');
 
   Result := True;
 end;
@@ -216,8 +226,10 @@ procedure TFrmCadPessoa.SBOkClick(Sender: TObject);
 begin
   if ValidarCadastro then
   begin
-    FFrmOk := True;
-    Close;
+    SetValues;
+    FFrmOk := TServPessoa.RegistrarPessoa(FPessoa);
+    if FFrmOk then
+      Close;
   end;
 end;
 

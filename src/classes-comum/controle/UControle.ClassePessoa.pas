@@ -22,8 +22,8 @@ type
     function Get(aID: Integer): TPessoa;
     function Gravar(aObj: TPessoa): TResposta;
     function Atualizar(aObj: TPessoa): TResposta;
-    function Listar(): TObjectList<TPessoa>; overload;
-    function Listar(Campo: string; Value: Variant): TObjectList<TPessoa>; overload;
+    function Listar(): TObjectList<TPessoa>;
+    function Filtrar(Campo: string; Value: Variant): TObjectList<TPessoa>;
     function Deletar(aID: Integer): Boolean;
 
   published
@@ -94,7 +94,7 @@ begin
   end;
 end;
 
-function TControlePessoa.Listar(Campo: string; Value: Variant): TObjectList<TPessoa>;
+function TControlePessoa.Filtrar(Campo: string; Value: Variant): TObjectList<TPessoa>;
 begin
   Result := TObjectList<TPessoa>.Create;
   Result.Clear;

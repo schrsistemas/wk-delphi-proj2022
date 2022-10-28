@@ -19,4 +19,10 @@ object DmSC: TDmSC
     Left = 176
     Top = 200
   end
+  object DSServerClassPessoa: TDSServerClass
+    OnGetClass = DSServerClassPessoaGetClass
+    Server = DSServer
+    Left = 176
+    Top = 256
+  end
 end

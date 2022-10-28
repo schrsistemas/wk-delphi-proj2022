@@ -97,11 +97,29 @@ begin
   edtServidor.Text := Sistema.CfgAppCliente.Servidor;
   edtPorta.Text := Sistema.CfgAppCliente.Porta.ToString;
 
+  TThread.CreateAnonymousThread(
+    procedure
+    begin
+      TThread.Synchronize(TThread.CurrentThread,
+        procedure
+        begin
+          if DmControle.ConectarServidor then
+          begin
+            lblInfo.Text := 'Conexão com o servidor: Ok!';
+          end
+          else
+          begin
+            lblInfo.Text := 'Conexão com o servidor: ??? Falha ???';
+          end;
+        end);
+
+    end).start();
+
 end;
 
 procedure TFrmMenuCliente.SBTestarClick(Sender: TObject);
 begin
-  DmControle.InitComponents;
+  ShowMessage(DmControle.Test);
 
 end;
 

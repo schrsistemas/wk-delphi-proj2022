@@ -4,7 +4,7 @@ interface
 
 uses
   URestUtil, UClasse.Pessoa, UClasse.Endereco, UClasse.EnderecoIntegracao,
-  UDmControle, USistema;
+  UDmControle, USistema, SysUtils, System.Classes;
 
 type
   TServPessoa = class(TObject)
@@ -25,10 +25,26 @@ type
 
 implementation
 
+uses
+  UClasseServidorClient;
+
 { TServPessoa }
 
 class function TServPessoa.BuscarPessoa(aID: Integer): TPessoa;
 begin
+  if not DmControle.SQLConnection.Connected then
+    DmControle.ConectarServidor;
+
+  try
+    var auxServ := TClasseServidorPessoaClient.Create(DmControle.SQLConnection.DBXConnection);
+    Result := auxServ.Get(aID);
+  except
+    on E: Exception do
+    begin
+      DmControle.DesConectarServidor;
+      raise E;
+    end;
+  end;
 
 end;
 
@@ -39,7 +55,19 @@ end;
 
 class function TServPessoa.RegistrarPessoa(aObj: TPessoa): Boolean;
 begin
+  if not DmControle.SQLConnection.Connected then
+    DmControle.ConectarServidor;
 
+  try
+    var auxServ := TClasseServidorPessoaClient.Create(DmControle.SQLConnection.DBXConnection);
+    auxServ.Gravar(aObj);
+  except
+    on E: Exception do
+    begin
+      DmControle.DesConectarServidor;
+      raise E;
+    end;
+  end;
 end;
 
 end.

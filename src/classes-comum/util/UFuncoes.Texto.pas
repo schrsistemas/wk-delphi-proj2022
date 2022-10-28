@@ -3,7 +3,7 @@
 interface
 
 uses
-  Windows, Classes, DateUtils, Math, Messages, SysUtils, StrUtils;
+  Classes, DateUtils, Math, SysUtils, StrUtils;
 
 function LimpaNumeros(Str: string): string;
 

@@ -57,11 +57,13 @@
 *.projdata
 *.tvsconfig
 *.dsk
+*.dex
 
 # Delphi history and backups
 __history/
 __recovery/
 DCU/
+debug/
 *.~*
 
 # Castalia statistics file (since XE7 Castalia is distributed with Delphi)

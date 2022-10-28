@@ -4,7 +4,7 @@ interface
 
 uses
   UICadastro, System.DateUtils, System.SysUtils, System.Classes, System.JSON,
-  UClasse.Endereco, UClasse.EnderecoIntegracao;
+  UClasse.Endereco, UClasse.EnderecoIntegracao, Generics.Collections, Rest.Json;
 
 {
 -- Pessoa
@@ -45,6 +45,9 @@ type
     property endereco: TEndereco read Fendereco write Fendereco;
     property enderecoIntegracao: TEnderecoIntegracao read FenderecoIntegracao write FenderecoIntegracao;
 
+    class function FromJsonString(AJsonString: string): TPessoa; static;
+    function ToJsonString: string;
+
     constructor Create;
     destructor Destroy; override;
 
@@ -73,6 +76,16 @@ begin
     enderecoIntegracao.Free;
 
   inherited;
+end;
+
+function TPessoa.ToJsonString: string;
+begin
+  result := TJson.ObjectToJsonString(self);
+end;
+
+class function TPessoa.FromJsonString(AJsonString: string): TPessoa;
+begin
+  result := TJson.JsonToObject<TPessoa>(AJsonString)
 end;
 
 end.

@@ -7,9 +7,9 @@ uses
   Data.DBXCommon, IPPeerClient, Data.DB, Data.SqlExpr, FireDAC.Stan.Intf,
   FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf, FireDAC.Phys.Intf,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.DS, FireDAC.Phys.DSDef, FireDAC.VCLUI.Wait, FireDAC.Phys.TDBXBase,
+  FireDAC.Phys.DS, FireDAC.Phys.DSDef, FireDAC.Phys.TDBXBase,
   FireDAC.Comp.Client, FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf,
-  UClasseServidorClient, FMX.Dialogs;
+  UClasseServidorClient;
 
 type
   iControle = interface
@@ -24,11 +24,13 @@ type
   TDmControle = class(TDataModule)
     SQLConnection: TSQLConnection;
   private
-    { Private declarations }
-  public
-    { Public declarations }
-    class function CreateDm: Boolean;
     procedure InitComponents;
+  public
+    class function CreateDm: Boolean;
+    function Test: string;
+    function ConectarServidor: Boolean;
+    function DesConectarServidor: Boolean;
+
   end;
 
 var
@@ -45,26 +47,52 @@ uses
 
 { TDmControle }
 
+function TDmControle.ConectarServidor: Boolean;
+begin
+  Result := False;
+
+  try
+    SQLConnection.Close;
+    SQLConnection.Params.Clear;
+    SQLConnection.Params.Add('DriverUnit=Data.DbxDatasnap');
+    SQLConnection.Params.Add('HostName=' + Sistema.CfgAppCliente.Servidor);
+    SQLConnection.Params.Add('Port=' + IntToStr(Sistema.CfgAppCliente.Porta));
+    SQLConnection.Params.Add('CommunicationProtocol=tcp/ip');
+    SQLConnection.Params.Add('DatasnapContext=datasnap/');
+    SQLConnection.Open;
+
+    Result := SQLConnection.Connected;
+  except
+    on E: Exception do
+    begin
+      raise E;
+    end;
+  end;
+
+end;
+
 class function TDmControle.CreateDm: Boolean;
 begin
   if not Assigned(DmControle) then
     DmControle := TDmControle.Create(nil);
 end;
 
-procedure TDmControle.InitComponents;
+function TDmControle.DesConectarServidor: Boolean;
 begin
   SQLConnection.Close;
-  SQLConnection.Params.Clear;
-  SQLConnection.Params.Add('DriverUnit=Data.DbxDatasnap');
-  SQLConnection.Params.Add('HostName=' + Sistema.CfgAppCliente.Servidor);
-  SQLConnection.Params.Add('Port=' + IntToStr(Sistema.CfgAppCliente.Porta));
-  SQLConnection.Params.Add('CommunicationProtocol=tcp/ip');
-  SQLConnection.Params.Add('DatasnapContext=datasnap/');
-  SQLConnection.Open;
+end;
 
+procedure TDmControle.InitComponents;
+begin
+
+end;
+
+function TDmControle.Test: string;
+begin
+  if not SQLConnection.Connected then
+    ConectarServidor;
   var cServidorClient: TClasseServidorClient := TClasseServidorClient.Create(SQLConnection.DBXConnection);
-  ShowMessage(cServidorClient.test);
-
+  Result := cServidorClient.Test;
 end;
 
 end.
