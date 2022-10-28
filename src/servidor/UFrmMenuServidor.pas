@@ -12,7 +12,7 @@ uses
   FMX.TabControl, URestUtil, FMX.StdCtrls, FMX.ScrollBox, FMX.Memo, FMX.Edit,
   FMX.Controls.Presentation, System.DateUtils, UConstantes, UConsultaCEP,
   REST.Types, Data.Bind.Components, Data.Bind.ObjectScope, REST.Client,
-  REST.Authenticator.Simple, FMX.Memo.Types;
+  REST.Authenticator.Simple, FMX.Memo.Types, USistema;
 
 type
   TFrmMenuServidor = class(TForm)
@@ -80,8 +80,11 @@ end;
 
 procedure TFrmMenuServidor.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  Sistema.GravaConfigCfgServidor(StrToIntDef(edtPorta.Text, 0));
+
   DmSC.PararServidor;
   DmSC.PararMonitorTarefas;
+
 end;
 
 procedure TFrmMenuServidor.FormDestroy(Sender: TObject);
@@ -92,19 +95,28 @@ begin
   if Assigned(DmBase) then
     DmBase.Free;
 
+  if Assigned(Sistema) then
+    Sistema.Free;
+
 end;
 
 procedure TFrmMenuServidor.FormShow(Sender: TObject);
 begin
   InitComponents;
+
+  SBStartClick(Sender);
+
 end;
 
 procedure TFrmMenuServidor.InitComponents;
 begin
   try
+    Sistema := TSistema.Create;
+    Sistema.Init;
+
   {$REGION 'Rest Server'}
     TDmSC.CreateDm;
-    edtPorta.Text := IntToStr(PORTA_REST_SERVER);
+    edtPorta.Text := Sistema.CfgAppServidor.Porta.ToString;
   {$ENDREGION}
 
   {$REGION 'Acesso DB'}
@@ -150,20 +162,24 @@ end;
 
 procedure TFrmMenuServidor.SBStartClick(Sender: TObject);
 begin
+  TDmSC.CreateDm;
   DmSC.IniciarServidor;
-
 end;
 
 procedure TFrmMenuServidor.SBStopClick(Sender: TObject);
 begin
+  TDmSC.CreateDm;
   DmSC.PararServidor;
 end;
 
 procedure TFrmMenuServidor.SetDisplayStatus;
 begin
-  lblMonitorTarefas.Text := DmSC.StatusMonitorTarefas;
+  if Assigned(DmSC) then
+  begin
+    lblMonitorTarefas.Text := DmSC.StatusMonitorTarefas;
 
-  lblServidorRest.Text := DmSC.StatusServidor;
+    lblServidorRest.Text := DmSC.StatusServidor;
+  end;
 
 end;
 

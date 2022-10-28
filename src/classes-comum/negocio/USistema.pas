@@ -3,7 +3,8 @@ unit USistema;
 interface
 
 uses
-  UControle.ClasseCfgAppCliente, UClasseCfgAppCliente;
+  UControle.ClasseCfgAppCliente, UControle.ClasseCfgAppServidor,
+  UClasseCfgAppCliente, UClasseCfgAppServidor;
 
 type
   ISistema = interface
@@ -13,11 +14,14 @@ type
   TSistema = class(TInterfacedObject, ISistema)
   private
     FCfgAppCliente: TClasseCfgAppCliente;
+    FCfgAppServidor: TClasseCfgAppServidor;
   public
     destructor Destroy; override;
     property CfgAppCliente: TClasseCfgAppCliente read FCfgAppCliente write FCfgAppCliente;
+    property CfgAppServidor: TClasseCfgAppServidor read FCfgAppServidor write FCfgAppServidor;
     procedure Init;
     function GravaConfigCfgCliente(aServidor: string; aPorta: Integer): Boolean;
+    function GravaConfigCfgServidor(aPorta: Integer): Boolean;
 
   end;
 
@@ -34,6 +38,9 @@ begin
   if Assigned(FCfgAppCliente) then
     FCfgAppCliente.Free;
 
+  if Assigned(FCfgAppServidor) then
+    FCfgAppServidor.Free;
+
   inherited;
 end;
 
@@ -49,9 +56,20 @@ begin
 
 end;
 
+function TSistema.GravaConfigCfgServidor(aPorta: Integer): Boolean;
+begin
+  if Assigned(FCfgAppServidor) then
+  begin
+    FCfgAppServidor.Porta := aPorta;
+
+    Result := TControleClasseCfgAppServidor.GravarIni(FCfgAppServidor);
+  end;
+end;
+
 procedure TSistema.Init;
 begin
   FCfgAppCliente := TControleClasseCfgAppCliente.CarregaIniParaClasse;
+  FCfgAppServidor := TControleClasseCfgAppServidor.CarregaIniParaClasse;
 
 end;
 

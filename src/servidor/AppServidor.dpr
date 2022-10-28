@@ -5,7 +5,6 @@ program AppServidor;
 
 uses
   FMX.Forms,
-  UDmSC in 'UDmSC.pas' {DmSC: TDataModule},
   UDmBase in 'UDmBase.pas' {DmBase: TDataModule},
   UClasseCfgDB in '..\classes-comum\negocio\UClasseCfgDB.pas',
   UControle.ClasseCfgDB in '..\classes-comum\controle\UControle.ClasseCfgDB.pas',
@@ -26,7 +25,12 @@ uses
   UIDAO in '..\classes-comum\interfaces\UIDAO.pas',
   UDAO in '..\classes-comum\dao\UDAO.pas',
   UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas',
-  UClasseRepostaOp in '..\classes-comum\negocio\UClasseRepostaOp.pas';
+  UClasseRepostaOp in '..\classes-comum\negocio\UClasseRepostaOp.pas',
+  USistema in '..\classes-comum\negocio\USistema.pas',
+  UClasseCfgAppServidor in '..\classes-comum\negocio\UClasseCfgAppServidor.pas',
+  UControle.ClasseCfgAppServidor in '..\classes-comum\controle\UControle.ClasseCfgAppServidor.pas',
+  UDmSC in 'UDmSC.pas' {DmSC: TDataModule},
+  UClasseServidor in 'UClasseServidor.pas';
 
 {$R *.res}
 

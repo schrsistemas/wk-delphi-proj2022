@@ -19,9 +19,10 @@ uses
   UClasseCfgAppCliente in '..\classes-comum\negocio\UClasseCfgAppCliente.pas',
   UConstantes in '..\classes-comum\util\UConstantes.pas',
   UControle.ClasseCfgAppCliente in '..\classes-comum\controle\UControle.ClasseCfgAppCliente.pas',
-  UDAO.ClasseCfgAppCliente in '..\classes-comum\dao\UDAO.ClasseCfgAppCliente.pas',
+  UDAO.ClasseCfgAppServidor in '..\classes-comum\dao\UDAO.ClasseCfgAppServidor.pas',
   USistema in '..\classes-comum\negocio\USistema.pas',
-  UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas';
+  UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas',
+  UClasseServidorClient in 'controle\UClasseServidorClient.pas';
 
 {$R *.res}
 

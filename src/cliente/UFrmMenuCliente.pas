@@ -101,7 +101,7 @@ end;
 
 procedure TFrmMenuCliente.SBTestarClick(Sender: TObject);
 begin
-  raise Exception.Create('Não implementado!');
+  DmControle.InitComponents;
 
 end;
 

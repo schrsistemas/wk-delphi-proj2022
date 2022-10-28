@@ -170,6 +170,7 @@
         <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UnitSearchPath>..\classes-comum\negocio\;..\classes-comum\controle\;..\classes-comum\dao\;..\classes-comum\util\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -216,9 +217,10 @@
         <DCCReference Include="..\classes-comum\negocio\UClasseCfgAppCliente.pas"/>
         <DCCReference Include="..\classes-comum\util\UConstantes.pas"/>
         <DCCReference Include="..\classes-comum\controle\UControle.ClasseCfgAppCliente.pas"/>
-        <DCCReference Include="..\classes-comum\dao\UDAO.ClasseCfgAppCliente.pas"/>
+        <DCCReference Include="..\classes-comum\dao\UDAO.ClasseCfgAppServidor.pas"/>
         <DCCReference Include="..\classes-comum\negocio\USistema.pas"/>
         <DCCReference Include="..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas"/>
+        <DCCReference Include="controle\UClasseServidorClient.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -237,8 +239,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k270.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp270.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\vclactnband260.bpl">Embarcadero Action Band Components</Excluded_Packages>
                 </Excluded_Packages>
                 <Source>
                     <Source Name="MainSource">AppCliente.dpr</Source>
@@ -1315,6 +1316,9 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
+            <DataSnapProxyLookup>
+                <UClasseServidorClient>{497810DE-FA55-4D40-9331-F6938BEF30CE}</UClasseServidorClient>
+            </DataSnapProxyLookup>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

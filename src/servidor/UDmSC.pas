@@ -4,7 +4,12 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.JSON, Rest.Json, Rest.Types,
-  UThreadMonitorEndereco;
+  UThreadMonitorEndereco, Datasnap.DSCommonServer, Datasnap.DSServer,
+  IPPeerServer, Datasnap.DSTCPServerTransport, Datasnap.DSAuth,
+  Data.Bind.Components, Data.Bind.ObjectScope, REST.Client, Data.FMTBcd,
+  DataSnap.DBClient, FireDAC.Phys.TDBXDef, FireDAC.Stan.Intf, FireDAC.Phys,
+  FireDAC.Phys.TDBXBase, FireDAC.Phys.TDBX, Data.Bind.DBScope,
+  Data.Bind.DBXScope, UClasseServidor;
 
 type
   iServerRest = interface
@@ -23,6 +28,12 @@ type
   end;
 
   TDmSC = class(TDataModule, iServerRest)
+    DSServer: TDSServer;
+    DSTCPServerTransport: TDSTCPServerTransport;
+    DSServerClass: TDSServerClass;
+    procedure DSAuthenticationManagerUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
+    procedure DSAuthenticationManagerUserAuthorize(Sender: TObject; AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
+    procedure DSServerClassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
   private
     FthreadMonitorEndereco: TThreadMonitorEndereco;
     { Private declarations }
@@ -49,6 +60,11 @@ implementation
 
 {%CLASSGROUP 'System.Classes.TPersistent'}
 
+uses
+  USistema;
+
+{%CLASSGROUP 'System.Classes.TPersistent'}
+
 {$R *.dfm}
 
 { TDmSC }
@@ -62,6 +78,21 @@ begin
 
 end;
 
+procedure TDmSC.DSAuthenticationManagerUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
+begin
+  valid := True;
+end;
+
+procedure TDmSC.DSAuthenticationManagerUserAuthorize(Sender: TObject; AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
+begin
+  valid := True;
+end;
+
+procedure TDmSC.DSServerClassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := TClasseServidor;
+end;
+
 function TDmSC.IniciarMonitorTarefas: iServerRest;
 begin
   FthreadMonitorEndereco := TThreadMonitorEndereco.Create(True);
@@ -71,6 +102,9 @@ end;
 
 function TDmSC.IniciarServidor: iServerRest;
 begin
+  DSTCPServerTransport.Port := Sistema.CfgAppServidor.Porta;
+
+  DSServer.Start;
 
 end;
 
@@ -83,6 +117,7 @@ end;
 
 function TDmSC.PararServidor: iServerRest;
 begin
+  DSServer.Stop;
 
 end;
 
@@ -101,7 +136,11 @@ end;
 
 function TDmSC.StatusServidor: string;
 begin
-  Result := 'Status Servidor: ???';
+  if DSServer.Started then
+    Result := 'Status Servidor: OK!'
+  else
+    Result := 'Status Servidor: ???';
+
 end;
 
 end.

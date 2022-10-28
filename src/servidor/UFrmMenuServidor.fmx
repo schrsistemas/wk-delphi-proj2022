@@ -27,7 +27,7 @@ object FrmMenuServidor: TFrmMenuServidor
       Size.Width = 748.000000000000000000
       Size.Height = 420.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -41,7 +41,7 @@ object FrmMenuServidor: TFrmMenuServidor
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 51.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -173,7 +173,7 @@ object FrmMenuServidor: TFrmMenuServidor
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 41.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
