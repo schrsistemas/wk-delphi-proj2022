@@ -5,7 +5,7 @@ interface
 uses
   UClasse.Endereco, UClasse.EnderecoIntegracao, UClasse.Pessoa,
   UDao.ClassePessoa, UDao.ClasseEndereco, UDao.ClasseEnderecoIntegracao,
-  Generics.Collections, Rest.Json, UClasseRepostaOp;
+  Generics.Collections, Rest.Json, UClasseRepostaOp, System.Classes, SysUtils;
 
 type
   IControlePessoa = interface
@@ -78,13 +78,20 @@ begin
   var DAOEnderecoIntegracao: TDAOEnderecoIntegracao := TDAOEnderecoIntegracao.Create;
   DAOEnderecoIntegracao.Gravar(aObj.enderecoIntegracao);
 
+  Result.Obj := aObj;
+
 end;
 
 function TControlePessoa.Listar: TObjectList<TPessoa>;
 begin
   Result := TObjectList<TPessoa>.Create;
   Result.Clear;
-
+  var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
+  var Ids: TStringList := DAOPessoa.ListarIds;
+  for var I := 0 to Ids.Count - 1 do
+  begin
+    Result.Add(Get(StrToIntDef(Ids[I], 0)));
+  end;
 end;
 
 function TControlePessoa.Listar(Campo: string; Value: Variant): TObjectList<TPessoa>;

@@ -9,7 +9,7 @@ interface
 
 uses
   UDAO, FireDAC.Comp.Client, UClasse.Pessoa, Generics.Collections, Rest.Json,
-  UClasseRepostaOp, System.SysUtils;
+  UClasseRepostaOp, System.SysUtils, System.Classes;
 
 type
   IDAOPessoa = interface
@@ -22,6 +22,7 @@ type
     function Get(aID: Integer): TObject;
     function Gravar(aObj: TObject): TResposta;
     function Atualizar(aObj: TObject): TResposta;
+    function ListarIds(): TStringList;
     function Listar(): TObjectList<TObject>; overload;
     function Listar(Campo: string; Value: Variant): TObjectList<TObject>; overload;
     function Deletar(aID: Integer): Boolean;
@@ -39,7 +40,7 @@ end;
 function TDAOPessoa.Deletar(aID: Integer): Boolean;
 begin
   Result := False;
-  Query := GeraQuery('DELETE FROM pessoa WHERE idpessoa = :pe_id;');
+  Query := GeraQuery('SELECT * FROM pessoa WHERE idpessoa = :pe_id;');
 
   try
     Query.Close;
@@ -157,6 +158,35 @@ begin
   Result := TObjectList<TObject>.Create;
   Result.Clear;
 
+end;
+
+function TDAOPessoa.ListarIds: TStringList;
+begin
+  Result := TStringList.Create;
+
+  Query := GeraQuery('SELECT idpessoa FROM pessoa;');
+
+  try
+    Query.Close;
+    Query.Open;
+    Query.First;
+    try
+      while not Query.Eof do
+      begin
+        Result.Add(Query.FieldByName('idpessoa').AsString);
+        Query.Next;
+      end;
+
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
 end;
 
 end.

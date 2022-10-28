@@ -138,9 +138,13 @@ begin
   var auxPessoa: TPessoa := TPessoa.Create;
   var cPessoa := TControlePessoa.Create;
 
-  cPessoa.Gravar(auxPessoa);
+  var auxR := cPessoa.Gravar(auxPessoa);
 
-  cPessoa.Get(1);
+  cPessoa.Get(TPessoa(auxR.Obj).idpessoa);
+
+  cPessoa.Listar;
+
+  cPessoa.Deletar(TPessoa(auxR.Obj).idpessoa);
 
 end;
 
