@@ -43,6 +43,7 @@ function TControlePessoa.Deletar(aID: Integer): Boolean;
 begin
   var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
   Result := DAOPessoa.Deletar(aID);
+  // Result.Msg := 'Pessoa (Id) = ' + IntToStr(aID) + ' deletado da base!';
 end;
 
 function TControlePessoa.Get(aID: Integer): TPessoa;
@@ -54,7 +55,7 @@ begin
   Result.endereco := TEndereco(DAOEndereco.Get(aID));
 
   var DAOEnderecoIntegracao: TDAOEnderecoIntegracao := TDAOEnderecoIntegracao.Create;
-  Result.enderecoIntegracao := TEnderecoIntegracao(DAOEnderecoIntegracao.Get(aID));
+  Result.enderecoIntegracao := TEnderecoIntegracao(DAOEnderecoIntegracao.Get(Result.endereco.idendereco));
 
 end;
 
@@ -78,6 +79,7 @@ begin
   var DAOEnderecoIntegracao: TDAOEnderecoIntegracao := TDAOEnderecoIntegracao.Create;
   DAOEnderecoIntegracao.Gravar(aObj.enderecoIntegracao);
 
+  Result.Msg := 'Pessoa (Id) = ' + IntToStr(aObj.idpessoa) + ' registrado em base!';
   Result.Obj := aObj;
 
 end;

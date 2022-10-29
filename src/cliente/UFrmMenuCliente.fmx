@@ -2,8 +2,8 @@ object FrmMenuCliente: TFrmMenuCliente
   Left = 0
   Top = 0
   Caption = 'Menu : Cliente'
-  ClientHeight = 608
-  ClientWidth = 921
+  ClientHeight = 624
+  ClientWidth = 815
   Position = ScreenCenter
   FormFactor.Width = 320
   FormFactor.Height = 480
@@ -13,8 +13,8 @@ object FrmMenuCliente: TFrmMenuCliente
   DesignerMasterStyle = 0
   object LytContainer: TLayout
     Align = Client
-    Size.Width = 921.000000000000000000
-    Size.Height = 608.000000000000000000
+    Size.Width = 815.000000000000000000
+    Size.Height = 624.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 3
     object tbcContainer: TTabControl
@@ -23,25 +23,25 @@ object FrmMenuCliente: TFrmMenuCliente
       Margins.Top = 4.000000000000000000
       Margins.Right = 4.000000000000000000
       Margins.Bottom = 4.000000000000000000
-      Size.Width = 913.000000000000000000
-      Size.Height = 600.000000000000000000
+      Size.Width = 807.000000000000000000
+      Size.Height = 616.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 2
+      TabIndex = 1
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
-        913s
-        574s
-        913s
-        574s
-        913s
-        574s
-        913s
-        574s
-        913s
-        574s
-        913s
-        574s)
+        807s
+        590s
+        807s
+        590s
+        807s
+        590s
+        807s
+        590s
+        807s
+        590s
+        807s
+        590s)
       object tbtmMenu: TTabItem
         CustomIcon = <
           item
@@ -57,8 +57,8 @@ object FrmMenuCliente: TFrmMenuCliente
         ExplicitSize.cy = 26.000000000000000000
         object lblInfo: TLabel
           Align = Bottom
-          Position.Y = 512.000000000000000000
-          Size.Width = 913.000000000000000000
+          Position.Y = 528.000000000000000000
+          Size.Width = 807.000000000000000000
           Size.Height = 62.000000000000000000
           Size.PlatformDefault = False
           TextSettings.HorzAlign = Center
@@ -70,13 +70,14 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 67.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
         Text = 'Consulta'
+        OnClick = tbtmConsultaClick
         ExplicitSize.cx = 67.000000000000000000
         ExplicitSize.cy = 26.000000000000000000
       end
@@ -84,23 +85,16 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 68.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
         StyleLookup = ''
         TabOrder = 0
         Text = 'Cadastro'
+        OnClick = tbtmCadastroClick
         ExplicitSize.cx = 68.000000000000000000
         ExplicitSize.cy = 26.000000000000000000
-        object btnEfetuarCadastro: TSpeedButton
-          Align = Client
-          Size.Width = 913.000000000000000000
-          Size.Height = 574.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'Efetuar Cadastro'
-          OnClick = btnEfetuarCadastroClick
-        end
       end
       object tbtmImporta: TTabItem
         CustomIcon = <
@@ -118,8 +112,8 @@ object FrmMenuCliente: TFrmMenuCliente
         object btnImportarDados: TSpeedButton
           Align = Client
           StyledSettings = [Family, FontColor]
-          Size.Width = 913.000000000000000000
-          Size.Height = 360.000000000000000000
+          Size.Width = 807.000000000000000000
+          Size.Height = 376.000000000000000000
           Size.PlatformDefault = False
           Text = 'Importar Dados'
           TextSettings.Font.Size = 16.000000000000000000
@@ -139,14 +133,14 @@ object FrmMenuCliente: TFrmMenuCliente
           StyledSettings = [Family, Size, FontColor]
           TextSettings.Font.StyleExt = {00070000000000000004000000}
           Align = Bottom
-          Position.Y = 360.000000000000000000
-          Size.Width = 913.000000000000000000
+          Position.Y = 376.000000000000000000
+          Size.Width = 807.000000000000000000
           Size.Height = 214.000000000000000000
           Size.PlatformDefault = False
           TabOrder = 9
           TabStop = False
-          Viewport.Width = 913.000000000000000000
-          Viewport.Height = 214.000000000000000000
+          Viewport.Width = 803.000000000000000000
+          Viewport.Height = 210.000000000000000000
         end
       end
       object tbtmExporta: TTabItem
@@ -164,8 +158,8 @@ object FrmMenuCliente: TFrmMenuCliente
         ExplicitSize.cy = 26.000000000000000000
         object btnExportarDados: TSpeedButton
           Align = Client
-          Size.Width = 913.000000000000000000
-          Size.Height = 574.000000000000000000
+          Size.Width = 807.000000000000000000
+          Size.Height = 590.000000000000000000
           Size.PlatformDefault = False
           Text = 'Exportar Dados'
         end

@@ -1,0 +1,265 @@
+object FrmConsPessoa: TFrmConsPessoa
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = None
+  Caption = 'Consulta : Pessoa'
+  ClientHeight = 617
+  ClientWidth = 783
+  Position = MainFormCenter
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  OnShow = FormShow
+  DesignerMasterStyle = 0
+  object lytContainer: TLayout
+    Align = Client
+    Size.Width = 783.000000000000000000
+    Size.Height = 617.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 2
+    object LytHeader: TLayout
+      Align = Top
+      Size.Width = 783.000000000000000000
+      Size.Height = 48.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      object RtTitle: TRectangle
+        Align = Client
+        Fill.Color = claDarkgray
+        Size.Width = 783.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Color = claGray
+        object SBClose: TSpeedButton
+          Align = Right
+          StyledSettings = [Family]
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Position.X = 715.000000000000000000
+          Position.Y = 4.000000000000000000
+          Size.Width = 64.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'stoptoolbutton'
+          Text = 'Gravar'
+          TextSettings.Font.Size = 16.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          OnClick = SBCloseClick
+        end
+        object LblTitle: TLabel
+          Align = Client
+          StyledSettings = [Family]
+          Margins.Left = 4.000000000000000000
+          Margins.Top = 4.000000000000000000
+          Margins.Right = 4.000000000000000000
+          Margins.Bottom = 4.000000000000000000
+          Size.Width = 703.000000000000000000
+          Size.Height = 40.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00070000000000000004000000}
+          TextSettings.FontColor = claWhite
+          Text = 'Consulta : Pessoa'
+          TabOrder = 0
+        end
+      end
+    end
+    object LytBody: TLayout
+      Align = Client
+      Size.Width = 783.000000000000000000
+      Size.Height = 569.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+      object lytToolbar: TLayout
+        Align = Bottom
+        Position.Y = 509.000000000000000000
+        Size.Width = 783.000000000000000000
+        Size.Height = 60.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 1
+        object btnRefresh: TSpeedButton
+          Align = Right
+          Margins.Right = 5.000000000000000000
+          Position.X = 730.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'refreshtoolbutton'
+          Text = 'btnRefresh'
+          OnClick = btnRefreshClick
+        end
+        object btnAdd: TSpeedButton
+          Align = Right
+          Margins.Right = 5.000000000000000000
+          Position.X = 677.000000000000000000
+          Size.Width = 48.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          StyleLookup = 'addtoolbutton'
+          Text = 'btnRefresh'
+          OnClick = btnAddClick
+        end
+        object LblInfo: TLabel
+          Align = Left
+          StyledSettings = [Family, FontColor]
+          Margins.Left = 10.000000000000000000
+          Position.X = 10.000000000000000000
+          Size.Width = 199.000000000000000000
+          Size.Height = 60.000000000000000000
+          Size.PlatformDefault = False
+          TextSettings.Font.Size = 14.000000000000000000
+          TextSettings.Font.StyleExt = {00060000000000000004000000}
+          Text = '??? registros ???'
+          TabOrder = 3
+        end
+      end
+      object lvLista: TListView
+        ItemAppearanceClassName = 'TDynamicAppearance'
+        ItemEditAppearanceClassName = 'TDynamicAppearance'
+        HeaderAppearanceClassName = 'TListHeaderObjects'
+        FooterAppearanceClassName = 'TListHeaderObjects'
+        OnUpdateObjects = lvListaUpdateObjects
+        ItemSpaces.Left = 0.000000000000000000
+        ItemSpaces.Right = 0.000000000000000000
+        Align = Client
+        Size.Width = 783.000000000000000000
+        Size.Height = 509.000000000000000000
+        Size.PlatformDefault = False
+        TabOrder = 0
+        ItemAppearance.ItemHeight = 90
+        ItemAppearanceObjects.ItemObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'txtNome'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.StyleExt = {00070000000000000004000000}
+            Appearance.TextAlign = Leading
+            Appearance.TextColor = xFF1A1A1A
+            Appearance.Width = 578.000000000000000000
+            Appearance.Height = 22.000000000000000000
+            Appearance.PlaceOffset.X = 7.000000000000000000
+            Appearance.PlaceOffset.Y = 3.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'txtDtRegistro'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 13.000000000000000000
+            Appearance.TextAlign = Leading
+            Appearance.TextVertAlign = Leading
+            Appearance.TextColor = xFF9A9A9A
+            Appearance.Width = 186.000000000000000000
+            Appearance.Height = 20.000000000000000000
+            Appearance.PlaceOffset.X = 399.000000000000000000
+            Appearance.PlaceOffset.Y = 27.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'txtNatureza'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 13.000000000000000000
+            Appearance.TextAlign = Leading
+            Appearance.TextVertAlign = Leading
+            Appearance.TextColor = xFF9A9A9A
+            Appearance.Width = 186.000000000000000000
+            Appearance.Height = 20.000000000000000000
+            Appearance.PlaceOffset.X = 7.000000000000000000
+            Appearance.PlaceOffset.Y = 27.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'txtDocumento'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 13.000000000000000000
+            Appearance.TextAlign = Leading
+            Appearance.TextVertAlign = Leading
+            Appearance.TextColor = xFF9A9A9A
+            Appearance.Width = 186.000000000000000000
+            Appearance.Height = 20.000000000000000000
+            Appearance.PlaceOffset.X = 199.000000000000000000
+            Appearance.PlaceOffset.Y = 27.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'txtEndereco'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.TextAlign = Leading
+            Appearance.TextVertAlign = Leading
+            Appearance.TextColor = xFF9A9A9A
+            Appearance.Width = 384.000000000000000000
+            Appearance.Height = 37.000000000000000000
+            Appearance.PlaceOffset.X = 200.000000000000000000
+            Appearance.PlaceOffset.Y = 50.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'txtCEP'
+            AppearanceClassName = 'TTextObjectAppearance'
+            Appearance.Font.Size = 13.000000000000000000
+            Appearance.TextAlign = Leading
+            Appearance.TextVertAlign = Leading
+            Appearance.TextColor = xFF9A9A9A
+            Appearance.Width = 185.000000000000000000
+            Appearance.Height = 20.000000000000000000
+            Appearance.PlaceOffset.X = 8.000000000000000000
+            Appearance.PlaceOffset.Y = 51.000000000000000000
+          end
+          item
+            AppearanceObjectName = 'imgDelete'
+            AppearanceClassName = 'TImageObjectAppearance'
+            Appearance.Width = 49.000000000000000000
+            Appearance.Height = 50.000000000000000000
+            Appearance.PlaceOffset.X = 712.000000000000000000
+            Appearance.PlaceOffset.Y = 15.000000000000000000
+          end>
+        ItemAppearanceObjects.ItemEditObjects.ObjectsCollection = <
+          item
+            AppearanceObjectName = 'Text1'
+            AppearanceClassName = 'TTextObjectAppearance'
+          end>
+        CanSwipeDelete = False
+        OnItemClickEx = lvListaItemClickEx
+        ShowSelection = False
+        object imgDelete: TImage
+          MultiResBitmap.Height = 64
+          MultiResBitmap.Width = 64
+          MultiResBitmap = <
+            item
+              Width = 64
+              Height = 64
+              PNG = {
+                89504E470D0A1A0A0000000D4948445200000040000000400806000000AA6971
+                DE000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+                02C649444154785EED9BBB6E13411486676637B12203052D49E9A040A48806C8
+                0B809140512E153D498178005E027A8B3254B115255220457A48032EA048DC71
+                2B29B8C8B1939DC3CCFA6C1462AFB5BBCCC8BBCCF924FB3F73B1ECF3EF5C5693
+                2C2308C26938AA350EABD51294CB6B42CA87AA38CB8428F75A6290F2B77AFFC0
+                385FEF785E6D7663A3DB6BB08355030E5656AE08801D15CEF56A5202D09442DC
+                BF5AAF7FC51AE35833405F795E2EEFAB305BF21141F0BE333676DBD64810A8C6
+                D1C35EC9BF25AFF1BC1B25291F61C938D646406B69695FCDE39B5864C0D82B35
+                BFD7A63737BF60D5400E171727D5E76A9CF37B58A5795B6934E631368AB511C0
+                8E8EAE61D42341F21ADD8707811E3D67B98E6A1C7B064C4C5CC0282449F21195
+                ADADCF18465C44358E3D030AC2D035A0B5B030C57CFFB90AEFA897B5AB60899F
+                6ADDD90B387F3A53AF1F605D1FB10684C94BD964E3E397B1AA9874BBDFC1F7E7
+                E2A660FC14D057BEE8C96B540E6A477986A53E86AD017AD8FF1F00DCC5A88F61
+                06146DCEC723C4258CFA707E17186640E27D3BEF9C3076FEBEE2945803D4F6B0
+                AAA4F026E8E47D29752E0441107DA43E0F682D2FAB5BECFC52693452E544F701
+                A8CE4206A03A0B19806A921DC9F92448390500AFB16E10A6FB65C2F836A87F68
+                74FA82476A9FC2867398EE1731F26DF0ECD1D380D3DD534CF7CB0AAD01A8CE42
+                06A03A0B1980EA2C6400AAB39001A8CE4206A03A0B1980EA2C6400AAB39001A8
+                C608FFD313098FB06230DD2F2BE6CF04F5C125C02A97924BDFAF2987ABD8F417
+                A6FB45A43D13346EC0A8A1BF0DA624BD01EDF62F8CF287943F304A4C7A034AA5
+                8F18E58E80F3D4BF2DCB1478899A3B04C03A8689496D00B4DB35B52A37B1981B
+                02C6DE757DFF05161393DA80E9DDDD8E7E90294F26E8E4E1F8F84196E78AB24C
+                01A69FE2EA78DE2D65C29300E0CD481646F59DFABB41CAC72742CCCF6C6F7FC3
+                168220888430F60726941BE8555F6DA20000000049454E44AE426082}
+              FileName = 
+                'D:\99Coders\Posts\303 - Criando listas de dados no Delphi com Li' +
+                'stview\FontesFull\Images\delete.png'
+            end>
+          Position.X = 80.000000000000000000
+          Position.Y = 248.000000000000000000
+          Visible = False
+        end
+      end
+    end
+  end
+end

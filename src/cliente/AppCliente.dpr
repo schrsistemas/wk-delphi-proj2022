@@ -22,7 +22,8 @@ uses
   UDAO.ClasseCfgAppServidor in '..\classes-comum\dao\UDAO.ClasseCfgAppServidor.pas',
   USistema in '..\classes-comum\negocio\USistema.pas',
   UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas',
-  UClasseServidorClient in 'controle\UClasseServidorClient.pas';
+  UClasseServidorClient in 'controle\UClasseServidorClient.pas',
+  UFrmConsPessoa in 'visao\UFrmConsPessoa.pas' {FrmConsPessoa};
 
 {$R *.res}
 
@@ -32,5 +33,6 @@ begin
   ReportMemoryLeaksOnShutdown := True;
 {$ENDIF}
   Application.CreateForm(TFrmMenuCliente, FrmMenuCliente);
+  Application.CreateForm(TFrmConsPessoa, FrmConsPessoa);
   Application.Run;
 end.

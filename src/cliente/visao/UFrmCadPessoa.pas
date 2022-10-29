@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   UClasse.Endereco, UClasse.Pessoa, FMX.Objects, FMX.Controls.Presentation,
   FMX.StdCtrls, FMX.Edit, FMX.ComboEdit, FMX.DateTimeCtrls, UConsultaCEP,
-  UFuncoes.Texto, UControle.Service.Pessoa, URestUtil, UDmControle;
+  UFuncoes.Texto, UControle.Service.Pessoa, URestUtil, UDmControle,
+  UClasseRepostaOp;
 
 type
   TFrmCadPessoa = class(TForm)
@@ -165,6 +166,8 @@ begin
     FrmCadPessoa.GetValues;
 
     FrmCadPessoa.ShowModal;
+
+    Result := FrmCadPessoa.FrmOk;
   finally
     FrmCadPessoa.Free;
   end;
@@ -227,7 +230,13 @@ begin
   if ValidarCadastro then
   begin
     SetValues;
-    FFrmOk := TServPessoa.RegistrarPessoa(FPessoa);
+
+    var resp := TServPessoa.RegistrarPessoa(FPessoa);
+
+    if resp.Msg <> '' then
+      ShowMessage(resp.Msg);
+
+    FFrmOk := (resp.Operacao <> opErro);
     if FFrmOk then
       Close;
   end;

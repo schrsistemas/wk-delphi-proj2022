@@ -16,7 +16,7 @@ type
     function Deletar(aID: Integer): Boolean;
 
     function Filtrar(Campo: string; Value: string): TObjectList<TPessoa>;
-    function Listar: TObjectList<TPessoa>; overload;
+    function Listar: TObjectList<TPessoa>;
 
     function Importar(value: TStream): Boolean;
     function Exportar: TStream;

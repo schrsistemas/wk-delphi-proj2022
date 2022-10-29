@@ -20,7 +20,6 @@ type
     lblInfo: TLabel;
     btnImportarDados: TSpeedButton;
     btnExportarDados: TSpeedButton;
-    btnEfetuarCadastro: TSpeedButton;
     tbtmConfig: TTabItem;
     grpConfigAcesso: TGroupBox;
     LblURL: TLabel;
@@ -33,10 +32,11 @@ type
     mmoExemploImp: TMemo;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure btnEfetuarCadastroClick(Sender: TObject);
     procedure SBTestarClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btnImportarDadosClick(Sender: TObject);
+    procedure tbtmCadastroClick(Sender: TObject);
+    procedure tbtmConsultaClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -50,15 +50,9 @@ var
 implementation
 
 uses
-  UDmControle, UFrmCadPessoa;
+  UDmControle, UFrmCadPessoa, UFrmConsPessoa;
 
 {$R *.fmx}
-
-procedure TFrmMenuCliente.btnEfetuarCadastroClick(Sender: TObject);
-begin
-  TFrmCadPessoa.ShowFrm(0);
-
-end;
 
 procedure TFrmMenuCliente.btnImportarDadosClick(Sender: TObject);
 begin
@@ -128,6 +122,16 @@ begin
   if Sistema.GravaConfigCfgCliente(edtServidor.Text, StrToIntDef(edtPorta.Text, 0)) then
     ShowMessage('Configuração gravado com sucesso!');
 
+end;
+
+procedure TFrmMenuCliente.tbtmCadastroClick(Sender: TObject);
+begin
+  TFrmCadPessoa.ShowFrm(0);
+end;
+
+procedure TFrmMenuCliente.tbtmConsultaClick(Sender: TObject);
+begin
+  TFrmConsPessoa.ShowFrm;
 end;
 
 end.
