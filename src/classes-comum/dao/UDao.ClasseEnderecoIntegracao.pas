@@ -37,7 +37,7 @@ begin
     Query := GeraQuery('SELECT idendereco, dsuf, nmcidade, nmbairro, nmlogradouro, dscomplemento FROM endereco_integracao WHERE idendereco = :pe_idendereco;');
 
     Query.Close;
-    Query.ParamByName('pe_idendereco').AsInteger := TEnderecoIntegracao(Result).idEndereco;
+    Query.ParamByName('pe_idendereco').AsInteger := aID;
     Query.Open;
 
     try

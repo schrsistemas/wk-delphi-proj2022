@@ -26,6 +26,8 @@ type
     function Filtrar(Campo: string; Value: Variant): TObjectList<TPessoa>;
     function Deletar(aID: Integer): Boolean;
 
+    function ListarPendentesAtualizacaoEndereco(): TObjectList<TPessoa>;
+
   published
   { published declarations }
   end;
@@ -90,6 +92,18 @@ begin
   Result.Clear;
   var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
   var Ids: TStringList := DAOPessoa.ListarIds;
+  for var I := 0 to Ids.Count - 1 do
+  begin
+    Result.Add(Get(StrToIntDef(Ids[I], 0)));
+  end;
+end;
+
+function TControlePessoa.ListarPendentesAtualizacaoEndereco: TObjectList<TPessoa>;
+begin
+  Result := TObjectList<TPessoa>.Create;
+  Result.Clear;
+  var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
+  var Ids: TStringList := DAOPessoa.ListarIdsPendentesAtualizacaoEndereco;
   for var I := 0 to Ids.Count - 1 do
   begin
     Result.Add(Get(StrToIntDef(Ids[I], 0)));

@@ -177,6 +177,9 @@ function TFrmCadPessoa.ValidarCadastro: Boolean;
 begin
   Result := False;
 
+  edtDocumento.Text := LimpaNumeros(edtDocumento.Text);
+  edtCEP.Text := LimpaNumeros(edtCEP.Text);
+
   if Trim(edtDocumento.Text) = '' then
     raise Exception.Create('Informe o Documento');
 

@@ -70,7 +70,6 @@ procedure TFrmConsPessoa.lvListaItemClickEx(const Sender: TObject; ItemIndex: In
 begin
   if (ItemObject <> nil) and (ItemObject.Name = 'imgDelete') then
   begin
-
     if MessageDlg('Deletar esta pessoa?', TMsgDlgType.mtConfirmation, mbOKCancel, 0) = mrOk then
     begin
       if TServPessoa.Deletar(Trunc(ItemObject.TagFloat)) then
@@ -78,14 +77,11 @@ begin
         lvLista.Items.Delete(ItemIndex);
       end;
     end;
-
   end
   else
   begin
-
     if TFrmCadPessoa.ShowFrm(lvLista.Items[ItemIndex].Tag) then
       Listar;
-
     //showmessage(TListItemText(lvLista.Items[ItemIndex].Objects.FindDrawable('txtNome')).Text);
   end;
 end;
@@ -133,18 +129,23 @@ begin
       TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
-          lvLista.BeginUpdate;
-          lvLista.Items.Clear;
-          lblInfo.Text := 'Aguarde,... Efetuando consulta!';
-          var values := TServPessoa.Listar;
-          var cont := 0;
-          for var pessoa in values do
-          begin
-            AddRegistroListView(pessoa);
-            cont := cont + 1;
+          btnRefresh.Enabled := False;
+          try
+            lvLista.BeginUpdate;
+            lvLista.Items.Clear;
+            lblInfo.Text := 'Aguarde,... Efetuando consulta!';
+            var values := TServPessoa.Listar;
+            var cont := 0;
+            for var pessoa in values do
+            begin
+              AddRegistroListView(pessoa);
+              cont := cont + 1;
+            end;
+            lblInfo.Text := IntToStr(cont) + ' registros localizados.';
+            lvLista.EndUpdate;
+          finally
+            btnRefresh.Enabled := True;
           end;
-          lblInfo.Text := IntToStr(cont) + ' registros localizados.';
-          lvLista.EndUpdate;
         end);
     end).start();
 end;

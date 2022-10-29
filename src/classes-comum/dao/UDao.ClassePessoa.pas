@@ -22,9 +22,14 @@ type
     function Get(aID: Integer): TObject;
     function Gravar(aObj: TObject): TResposta;
     function Atualizar(aObj: TObject): TResposta;
-    function ListarIds(): TStringList;
+
+    function ListarIdsPendentesAtualizacaoEndereco: TStringList;
+    function ListarIds(Campo: string; Value: Variant): TStringList; overload;
+    function ListarIds: TStringList; overload;
+
     function Listar(): TObjectList<TObject>; overload;
     function Listar(Campo: string; Value: Variant): TObjectList<TObject>; overload;
+
     function Deletar(aID: Integer): Boolean;
   end;
 
@@ -160,7 +165,75 @@ begin
 
 end;
 
+function TDAOPessoa.ListarIdsPendentesAtualizacaoEndereco: TStringList;
+begin
+  Result := TStringList.Create;
+
+  var auxSQL := TStringList.Create;
+  auxSQL.Clear;
+  auxSQL.Add('select pessoa.idpessoa from pessoa');
+  auxSQL.Add('inner join endereco on (endereco.idpessoa = pessoa.idpessoa)');
+  auxSQL.Add('inner join endereco_integracao on (endereco.idendereco = endereco_integracao.idendereco)');
+  auxSQL.Add('where');
+  auxSQL.Add('coalesce(endereco_integracao.nmcidade) = ' + QuotedStr(''));
+  auxSQL.Add('or');
+  auxSQL.Add('coalesce(endereco_integracao.dsuf) = ' + QuotedStr(''));
+
+  Query := GeraQuery(auxSQL.Text);
+
+  try
+    Query.Close;
+    Query.Open;
+    Query.First;
+    try
+      while not Query.Eof do
+      begin
+        Result.Add(Query.FieldByName('idpessoa').AsString);
+        Query.Next;
+      end;
+
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
+end;
+
 function TDAOPessoa.ListarIds: TStringList;
+begin
+  Result := TStringList.Create;
+
+  Query := GeraQuery('SELECT idpessoa FROM pessoa;');
+
+  try
+    Query.Close;
+    Query.Open;
+    Query.First;
+    try
+      while not Query.Eof do
+      begin
+        Result.Add(Query.FieldByName('idpessoa').AsString);
+        Query.Next;
+      end;
+
+    finally
+      Query.Close;
+    end;
+  except
+    on E: Exception do
+    begin
+      Rollback;
+      raise E;
+    end;
+  end;
+end;
+
+function TDAOPessoa.ListarIds(Campo: string; Value: Variant): TStringList;
 begin
   Result := TStringList.Create;
 
