@@ -218,6 +218,7 @@ object FrmConsPessoa: TFrmConsPessoa
         CanSwipeDelete = False
         OnItemClickEx = lvListaItemClickEx
         ShowSelection = False
+        SearchVisible = True
         object imgDelete: TImage
           MultiResBitmap.Height = 64
           MultiResBitmap.Width = 64

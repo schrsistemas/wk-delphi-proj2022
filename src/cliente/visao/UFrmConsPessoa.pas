@@ -7,7 +7,7 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.StdCtrls,
   FMX.Controls.Presentation, FMX.Objects, FMX.Layouts, FMX.ListView.Types,
   FMX.ListView.Appearances, FMX.ListView.Adapters.Base, FMX.ListView,
-  System.Generics.Collections, UClasse.Pessoa;
+  System.Generics.Collections, UClasse.Pessoa, FMX.Edit;
 
 type
   TFrmConsPessoa = class(TForm)
