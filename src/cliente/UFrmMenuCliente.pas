@@ -19,7 +19,6 @@ type
     tbtmExporta: TTabItem;
     lblInfo: TLabel;
     btnImportarDados: TSpeedButton;
-    btnExportarDados: TSpeedButton;
     tbtmConfig: TTabItem;
     grpConfigAcesso: TGroupBox;
     LblURL: TLabel;
@@ -30,6 +29,7 @@ type
     edtPorta: TEdit;
     dlgOpen: TOpenDialog;
     mmoExemploImp: TMemo;
+    dlgSave: TSaveDialog;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SBTestarClick(Sender: TObject);
@@ -37,6 +37,7 @@ type
     procedure btnImportarDadosClick(Sender: TObject);
     procedure tbtmCadastroClick(Sender: TObject);
     procedure tbtmConsultaClick(Sender: TObject);
+    procedure tbtmExportaClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -59,7 +60,7 @@ begin
   dlgOpen.InitialDir := ExtractFilePath(ParamStr(0));
   if dlgOpen.Execute then
   begin
-    TServPessoa.ImportarListaPessoas(dlgOpen.FileName);
+    TServPessoa.ImportarLista(dlgOpen.FileName);
   end;
 
 end;
@@ -145,6 +146,15 @@ end;
 procedure TFrmMenuCliente.tbtmConsultaClick(Sender: TObject);
 begin
   TFrmConsPessoa.ShowFrm;
+end;
+
+procedure TFrmMenuCliente.tbtmExportaClick(Sender: TObject);
+begin
+  dlgSave.InitialDir := ExtractFilePath(ParamStr(0));
+  if dlgSave.Execute then
+  begin
+    TServPessoa.ExportarLista(dlgSave.FileName);
+  end;
 end;
 
 end.

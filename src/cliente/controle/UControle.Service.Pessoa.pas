@@ -21,12 +21,14 @@ type
 
     class function Importar(value: TStream): Boolean;
     class function Exportar: TStream;
+    class function ExportarLista(aLocal: string): TStringList;
 
     class function BuscarPessoa(aID: Integer): TPessoa;
     class function RegistrarPessoa(aObj: TPessoa): TResposta;
     class function Deletar(aID: Integer): Boolean;
 
     class function ImportarListaPessoas(aArquivo: string): Boolean;
+    class function ImportarLista(aArquivo: string): Boolean;
 
   published
   { published declarations }
@@ -79,6 +81,25 @@ begin
 
 end;
 
+class function TServPessoa.ExportarLista(aLocal: string): TStringList;
+begin
+  if not DmControle.SQLConnection.Connected then
+    DmControle.ConectarServidor;
+
+  try
+    var auxServ := TClasseServidorPessoaClient.Create(DmControle.SQLConnection.DBXConnection);
+    Result := auxServ.ExportarLista;
+
+    Result.SaveToFile(aLocal);
+  except
+    on E: Exception do
+    begin
+      DmControle.DesConectarServidor;
+      raise E;
+    end;
+  end;
+end;
+
 class function TServPessoa.Filtrar(Campo, Value: string): TObjectList<TPessoa>;
 begin
 
@@ -87,6 +108,25 @@ end;
 class function TServPessoa.Importar(value: TStream): Boolean;
 begin
 
+end;
+
+class function TServPessoa.ImportarLista(aArquivo: string): Boolean;
+begin
+  if not DmControle.SQLConnection.Connected then
+    DmControle.ConectarServidor;
+
+  try
+    var conteudo := TStringList.Create;
+    conteudo.LoadFromFile(aArquivo);
+    var auxServ := TClasseServidorPessoaClient.Create(DmControle.SQLConnection.DBXConnection);
+    Result := auxServ.ImportarLista(conteudo);
+  except
+    on E: Exception do
+    begin
+      DmControle.DesConectarServidor;
+      raise E;
+    end;
+  end;
 end;
 
 class function TServPessoa.ImportarListaPessoas(aArquivo: string): Boolean;

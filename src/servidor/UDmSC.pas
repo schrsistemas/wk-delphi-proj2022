@@ -9,7 +9,7 @@ uses
   Data.Bind.Components, Data.Bind.ObjectScope, REST.Client, Data.FMTBcd,
   DataSnap.DBClient, FireDAC.Phys.TDBXDef, FireDAC.Stan.Intf, FireDAC.Phys,
   FireDAC.Phys.TDBXBase, FireDAC.Phys.TDBX, Data.Bind.DBScope,
-  Data.Bind.DBXScope, UClasseServidor, UClasseServidor.Pessoa;
+  Data.Bind.DBXScope, UClasseServidor, UClasseServidor.Pessoa, Datasnap.DSHTTP;
 
 type
   iServerRest = interface
@@ -32,6 +32,9 @@ type
     DSTCPServerTransport: TDSTCPServerTransport;
     DSServerClass: TDSServerClass;
     DSServerClassPessoa: TDSServerClass;
+    DSHTTPServiceFileDispatcher: TDSHTTPServiceFileDispatcher;
+    DSHTTPService: TDSHTTPService;
+    DSAuthenticationManager: TDSAuthenticationManager;
     procedure DSAuthenticationManagerUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
     procedure DSAuthenticationManagerUserAuthorize(Sender: TObject; AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
     procedure DSServerClassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
@@ -70,6 +73,16 @@ uses
 {$R *.dfm}
 
 { TDmSC }
+
+
+{
+  Teste rest http (Exemplo...):
+
+    http://localhost:8020/datasnap/rest/TClasseServidor/test
+
+    http://localhost:8020/datasnap/rest/TClasseServidorPessoa/Listar
+
+}
 
 class function TDmSC.CreateDm: Boolean;
 begin

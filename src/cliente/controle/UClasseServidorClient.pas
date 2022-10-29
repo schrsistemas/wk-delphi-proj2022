@@ -1,17 +1,13 @@
 //
 // Created by the DataSnap proxy generator.
-// 28/10/2022 19:17:18
+// 29/10/2022 11:49:29
 //
 
 unit UClasseServidorClient;
 
 interface
 
-uses
-  System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON,
-  Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr,
-  Data.DBXDBReaders, Data.DBXCDSReaders, UClasse.Pessoa, UClasseRepostaOp,
-  System.Generics.Collections, Data.DBXJSONReflect;
+uses System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, UClasse.Pessoa, UClasseRepostaOp, System.Generics.Collections, Data.DBXJSONReflect;
 
 type
   TClasseServidorClient = class(TDSAdminClient)
@@ -33,7 +29,9 @@ type
     FFiltrarCommand: TDBXCommand;
     FListarCommand: TDBXCommand;
     FImportarCommand: TDBXCommand;
+    FImportarListaCommand: TDBXCommand;
     FExportarCommand: TDBXCommand;
+    FExportarListaCommand: TDBXCommand;
   public
     constructor Create(ADBXConnection: TDBXConnection); overload;
     constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
@@ -45,7 +43,9 @@ type
     function Filtrar(Campo: string; Value: string): TObjectList<UClasse.Pessoa.TPessoa>;
     function Listar: TObjectList<UClasse.Pessoa.TPessoa>;
     function Importar(value: TStream): Boolean;
+    function ImportarLista(listaCSV: TStringList): Boolean;
     function Exportar: TStream;
+    function ExportarLista: TStringList;
   end;
 
 implementation
@@ -256,9 +256,35 @@ begin
     FImportarCommand.Text := 'TClasseServidorPessoa.Importar';
     FImportarCommand.Prepare;
   end;
-  FImportarCommand.Parameters[0].value.SetStream(value, FInstanceOwner);
+  FImportarCommand.Parameters[0].Value.SetStream(value, FInstanceOwner);
   FImportarCommand.ExecuteUpdate;
-  Result := FImportarCommand.Parameters[1].value.GetBoolean;
+  Result := FImportarCommand.Parameters[1].Value.GetBoolean;
+end;
+
+function TClasseServidorPessoaClient.ImportarLista(listaCSV: TStringList): Boolean;
+begin
+  if FImportarListaCommand = nil then
+  begin
+    FImportarListaCommand := FDBXConnection.CreateCommand;
+    FImportarListaCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FImportarListaCommand.Text := 'TClasseServidorPessoa.ImportarLista';
+    FImportarListaCommand.Prepare;
+  end;
+  if not Assigned(listaCSV) then
+    FImportarListaCommand.Parameters[0].Value.SetNull
+  else
+  begin
+    FMarshal := TDBXClientCommand(FImportarListaCommand.Parameters[0].ConnectionHandler).GetJSONMarshaler;
+    try
+      FImportarListaCommand.Parameters[0].Value.SetJSONValue(FMarshal.Marshal(listaCSV), True);
+      if FInstanceOwner then
+        listaCSV.Free
+    finally
+      FreeAndNil(FMarshal)
+    end
+  end;
+  FImportarListaCommand.ExecuteUpdate;
+  Result := FImportarListaCommand.Parameters[1].Value.GetBoolean;
 end;
 
 function TClasseServidorPessoaClient.Exportar: TStream;
@@ -272,6 +298,31 @@ begin
   end;
   FExportarCommand.ExecuteUpdate;
   Result := FExportarCommand.Parameters[0].Value.GetStream(FInstanceOwner);
+end;
+
+function TClasseServidorPessoaClient.ExportarLista: TStringList;
+begin
+  if FExportarListaCommand = nil then
+  begin
+    FExportarListaCommand := FDBXConnection.CreateCommand;
+    FExportarListaCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FExportarListaCommand.Text := 'TClasseServidorPessoa.ExportarLista';
+    FExportarListaCommand.Prepare;
+  end;
+  FExportarListaCommand.ExecuteUpdate;
+  if not FExportarListaCommand.Parameters[0].Value.IsNull then
+  begin
+    FUnMarshal := TDBXClientCommand(FExportarListaCommand.Parameters[0].ConnectionHandler).GetJSONUnMarshaler;
+    try
+      Result := TStringList(FUnMarshal.UnMarshal(FExportarListaCommand.Parameters[0].Value.GetJSONValue(True)));
+      if FInstanceOwner then
+        FExportarListaCommand.FreeOnExecute(Result);
+    finally
+      FreeAndNil(FUnMarshal)
+    end
+  end
+  else
+    Result := nil;
 end;
 
 constructor TClasseServidorPessoaClient.Create(ADBXConnection: TDBXConnection);
@@ -293,7 +344,9 @@ begin
   FFiltrarCommand.DisposeOf;
   FListarCommand.DisposeOf;
   FImportarCommand.DisposeOf;
+  FImportarListaCommand.DisposeOf;
   FExportarCommand.DisposeOf;
+  FExportarListaCommand.DisposeOf;
   inherited;
 end;
 

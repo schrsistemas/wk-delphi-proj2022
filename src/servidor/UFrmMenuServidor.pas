@@ -38,6 +38,7 @@ type
     lblServidorRest: TLabel;
     grpTesteDAO: TGroupBox;
     SBGeraRegistroDB: TSpeedButton;
+    Button1: TButton;
     procedure FormShow(Sender: TObject);
     procedure SBConsultarCEPClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -46,6 +47,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure tmrMonitoraServidorTimer(Sender: TObject);
     procedure SBGeraRegistroDBClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -62,7 +64,7 @@ var
 implementation
 
 uses
-  UDmSC, UDmBase, UControle.ClassePessoa, UClasse.Pessoa;
+  UDmSC, UDmBase, UControle.ClassePessoa, UClasse.Pessoa, UClasseServidor.Pessoa;
 
 {$R *.fmx}
 
@@ -76,6 +78,13 @@ begin
   AddLog(e.Message);
   if e.StackTrace <> EmptyStr then
     AddLog(e.StackTrace);
+end;
+
+procedure TFrmMenuServidor.Button1Click(Sender: TObject);
+begin
+  var aux := TClasseServidorPessoa.Create(nil);
+  aux.Exportar;
+
 end;
 
 procedure TFrmMenuServidor.FormClose(Sender: TObject; var Action: TCloseAction);

@@ -26,7 +26,7 @@ object FrmMenuCliente: TFrmMenuCliente
       Size.Width = 807.000000000000000000
       Size.Height = 616.000000000000000000
       Size.PlatformDefault = False
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       TabPosition = PlatformDefault
       Sizes = (
@@ -70,7 +70,7 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = True
+        IsSelected = False
         Size.Width = 67.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -100,7 +100,7 @@ object FrmMenuCliente: TFrmMenuCliente
         CustomIcon = <
           item
           end>
-        IsSelected = False
+        IsSelected = True
         Size.Width = 81.000000000000000000
         Size.Height = 26.000000000000000000
         Size.PlatformDefault = False
@@ -154,15 +154,9 @@ object FrmMenuCliente: TFrmMenuCliente
         StyleLookup = ''
         TabOrder = 0
         Text = 'Exporta'#231#227'o'
+        OnClick = tbtmExportaClick
         ExplicitSize.cx = 79.000000000000000000
         ExplicitSize.cy = 26.000000000000000000
-        object btnExportarDados: TSpeedButton
-          Align = Client
-          Size.Width = 807.000000000000000000
-          Size.Height = 590.000000000000000000
-          Size.PlatformDefault = False
-          Text = 'Exportar Dados'
-        end
       end
       object tbtmConfig: TTabItem
         CustomIcon = <
@@ -264,5 +258,12 @@ object FrmMenuCliente: TFrmMenuCliente
     Filter = 'Arquivos CSV (*.CSV)|*.CSV'
     Left = 592
     Top = 200
+  end
+  object dlgSave: TSaveDialog
+    DefaultExt = '.CSV'
+    FileName = 'ListaPessoas'
+    Filter = 'Arquivos CSV (*.CSV)|*.CSV'
+    Left = 592
+    Top = 256
   end
 end

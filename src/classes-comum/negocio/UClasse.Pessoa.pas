@@ -4,7 +4,8 @@ interface
 
 uses
   UICadastro, System.DateUtils, System.SysUtils, System.Classes, System.JSON,
-  UClasse.Endereco, UClasse.EnderecoIntegracao, Generics.Collections, Rest.Json;
+  UClasse.Endereco, UClasse.EnderecoIntegracao, Generics.Collections, Rest.Json,
+  System.TypInfo;
 
 {
 -- Pessoa
@@ -21,7 +22,7 @@ create table pessoa
 }
 
 type
-  TNatureza = (natCPF, natCNPJ, natEstrangeiro);
+  TNatureza = (natCPF, natCNPJ, natEstrangeiro, natNI);
 
   TPessoa = class(TInterfacedObject, iCadastro)
   private
@@ -47,6 +48,7 @@ type
 
     class function FromJsonString(AJsonString: string): TPessoa; static;
     function ToJsonString: string;
+    function ToCSVString: string;
 
     constructor Create;
     destructor Destroy; override;
@@ -76,6 +78,13 @@ begin
     enderecoIntegracao.Free;
 
   inherited;
+end;
+
+function TPessoa.ToCSVString: string;
+begin
+  // CODIGO;NATUREZA;DOCUMENTO;NOME_RAZAO;NOME_SECUNDARIO;CEP;LOGRADOURO;BAIRRO;CIDADE;UF;COMPLEMENTO;
+  Result := IntToStr(idpessoa) + '|' + GetEnumName(TypeInfo(TNatureza), Integer(flnatureza)) + '|' + dsdocumento + '|' + nmprimeiro + '|' + nmsegundo + '|' + endereco.dscep + '|' + enderecoIntegracao.nmlogradouro + '|' + enderecoIntegracao.nmbairro + '|' + enderecoIntegracao.nmcidade + '|' + enderecoIntegracao.dsuf + '|' + enderecoIntegracao.dscomplemento;
+
 end;
 
 function TPessoa.ToJsonString: string;
