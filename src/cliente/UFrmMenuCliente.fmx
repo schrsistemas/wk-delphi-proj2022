@@ -139,8 +139,8 @@ object FrmMenuCliente: TFrmMenuCliente
           Size.PlatformDefault = False
           TabOrder = 9
           TabStop = False
-          Viewport.Width = 803.000000000000000000
-          Viewport.Height = 210.000000000000000000
+          Viewport.Width = 807.000000000000000000
+          Viewport.Height = 214.000000000000000000
         end
       end
       object tbtmExporta: TTabItem

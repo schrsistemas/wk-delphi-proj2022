@@ -97,13 +97,13 @@ begin
     // Nome
   TListItemText(item.Objects.FindDrawable('txtNome')).Text := value.nmprimeiro + ' - ' + value.nmsegundo;
 
-  if value.flnatureza = natCPF then
-  begin
-    TListItemText(item.Objects.FindDrawable('txtNatureza')).Text := 'Física (CPF)';
-  end
-  else
-  begin
-    TListItemText(item.Objects.FindDrawable('txtNatureza')).Text := 'Jurídica (CNPJ)';
+  case value.flnatureza of
+    natCPF:
+      TListItemText(item.Objects.FindDrawable('txtNatureza')).Text := 'Física (CPF)';
+    natCNPJ:
+      TListItemText(item.Objects.FindDrawable('txtNatureza')).Text := 'Jurídica (CNPJ)';
+    natEstrangeiro:
+      TListItemText(item.Objects.FindDrawable('txtNatureza')).Text := 'Estrangeiro (EX)';
   end;
 
   TListItemText(item.Objects.FindDrawable('txtDocumento')).Text := value.dsdocumento;
@@ -134,14 +134,20 @@ begin
             lvLista.BeginUpdate;
             lvLista.Items.Clear;
             lblInfo.Text := 'Aguarde,... Efetuando consulta!';
-            var values := TServPessoa.Listar;
-            var cont := 0;
-            for var pessoa in values do
-            begin
-              AddRegistroListView(pessoa);
-              cont := cont + 1;
+            try
+              var values := TServPessoa.Listar;
+              var cont := 0;
+              for var pessoa in values do
+              begin
+                AddRegistroListView(pessoa);
+                cont := cont + 1;
+              end;
+              lblInfo.Text := IntToStr(cont) + ' registros localizados.';
+            except
+              on E: Exception do
+                lblInfo.Text := 'Erro na conexão com o servidor... ' + E.Message;
             end;
-            lblInfo.Text := IntToStr(cont) + ' registros localizados.';
+
             lvLista.EndUpdate;
           finally
             btnRefresh.Enabled := True;

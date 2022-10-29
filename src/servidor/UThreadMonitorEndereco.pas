@@ -8,7 +8,7 @@ interface
 
 uses
   System.Classes, URestUtil, UClasse.Endereco, UClasse.Pessoa, Rest.Types,
-  System.JSON, UConsultaCEP, UDmBase, Generics.Collections;
+  System.JSON, UConsultaCEP, UDmBase, Generics.Collections, System.SysUtils;
 
 type
   TThreadMonitorEndereco = class(TThread)
@@ -62,17 +62,34 @@ begin
       for var pessoa in lista do
       begin
         try
-          var cep := TConsultaCEP.Instance.Consultar(pessoa.endereco.dscep);
+          if pessoa.flnatureza in [natCPF, natCNPJ] then
+          begin
+            var cep := TConsultaCEP.Instance.Consultar(pessoa.endereco.dscep);
 
-          pessoa.enderecoIntegracao.nmbairro := cep.bairro;
-          pessoa.enderecoIntegracao.nmlogradouro := cep.logradouro;
-          pessoa.enderecoIntegracao.nmcidade := cep.localidade;
-          pessoa.enderecoIntegracao.dsuf := cep.uf;
+            if cep.localidade <> '' then
+            begin
+              pessoa.enderecoIntegracao.nmbairro := cep.bairro;
+              pessoa.enderecoIntegracao.nmlogradouro := cep.logradouro;
+              pessoa.enderecoIntegracao.nmcidade := cep.localidade;
+              pessoa.enderecoIntegracao.dsuf := cep.uf;
+            end
+            else
+            begin
+              pessoa.enderecoIntegracao.nmlogradouro := '<cep nao localizado.>';
+              pessoa.enderecoIntegracao.nmcidade := 'NL';
+              pessoa.enderecoIntegracao.dsuf := 'NL';
+            end;
+          end
+          else
+          begin
+            pessoa.enderecoIntegracao.nmcidade := 'EX';
+            pessoa.enderecoIntegracao.dsuf := 'EX';
+          end;
 
         except
           on E: Exception do
           begin
-            pessoa.enderecoIntegracao.nmlogradouro := 'NI';
+            pessoa.enderecoIntegracao.nmlogradouro := '<cep nao localizado.>';
             pessoa.enderecoIntegracao.nmcidade := 'NI';
             pessoa.enderecoIntegracao.dsuf := 'NI';
           end;

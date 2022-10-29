@@ -16,7 +16,6 @@ object DmControle: TDmControle
         '.Data.DbxClientDriver,Version=24.0.0.0,Culture=neutral,PublicKey' +
         'Token=91d62ebb5b0d1b1b'
       'Filters={}')
-    Connected = True
     Left = 336
     Top = 240
     UniqueId = '{497810DE-FA55-4D40-9331-F6938BEF30CE}'

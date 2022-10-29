@@ -94,7 +94,12 @@ function TFrmCadPessoa.GetValues: Boolean;
 begin
   if FId > 0 then
   begin
-    FPessoa := TServPessoa.BuscarPessoa(FId);
+    try
+      FPessoa := TServPessoa.BuscarPessoa(FId);
+    except
+      on E: Exception do
+        ShowMessage(E.Message);
+    end;
   end
   else
   begin
@@ -189,6 +194,15 @@ begin
   if Trim(edtCEP.Text) = '' then
     raise Exception.Create('Informe o CEP');
 
+  if (Length(edtCEP.Text) <> 8) and (TNatureza(CmbNatureza.ItemIndex) in [natCPF, natCNPJ]) then
+    raise Exception.Create('Informe um CEP válido');
+
+  if (Length(edtDocumento.Text) < 11) and (TNatureza(CmbNatureza.ItemIndex) in [natCPF]) then // #lembrar - criar validação do documento informado
+    raise Exception.Create('Informe um CPF válido');
+
+  if (Length(edtDocumento.Text) < 14) and (TNatureza(CmbNatureza.ItemIndex) in [natCNPJ]) then // #lembrar - criar validação do documento informado
+    raise Exception.Create('Informe um CNPJ válido');
+
   Result := True;
 end;
 
@@ -234,14 +248,20 @@ begin
   begin
     SetValues;
 
-    var resp := TServPessoa.RegistrarPessoa(FPessoa);
+    try
+      var resp := TServPessoa.RegistrarPessoa(FPessoa);
 
-    if resp.Msg <> '' then
-      ShowMessage(resp.Msg);
+      if resp.Msg <> '' then
+        ShowMessage(resp.Msg);
 
-    FFrmOk := (resp.Operacao <> opErro);
-    if FFrmOk then
-      Close;
+      FFrmOk := (resp.Operacao <> opErro);
+      if FFrmOk then
+        Close;
+
+    except
+      on E: Exception do
+        ShowMessage(E.Message);
+    end;
   end;
 end;
 

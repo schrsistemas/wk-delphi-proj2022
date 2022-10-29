@@ -65,7 +65,7 @@ begin
   except
     on E: Exception do
     begin
-      raise E;
+      raise Exception.Create(E.Message);
     end;
   end;
 

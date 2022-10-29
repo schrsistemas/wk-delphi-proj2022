@@ -97,13 +97,18 @@ begin
       TThread.Synchronize(TThread.CurrentThread,
         procedure
         begin
-          if DmControle.ConectarServidor then
-          begin
-            lblInfo.Text := 'Conexão com o servidor: Ok!';
-          end
-          else
-          begin
-            lblInfo.Text := 'Conexão com o servidor: ??? Falha ???';
+          try
+            if DmControle.ConectarServidor then
+            begin
+              lblInfo.Text := 'Conexão com o servidor: Ok!';
+            end
+            else
+            begin
+              lblInfo.Text := 'Conexão com o servidor: ??? Falha ???';
+            end;
+          except
+            on E: Exception do
+              lblInfo.Text := 'Conexão com o servidor: ??? Falha ??? ' + E.Message;
           end;
         end);
 

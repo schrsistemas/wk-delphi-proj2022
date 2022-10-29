@@ -21,7 +21,7 @@ create table pessoa
 }
 
 type
-  TNatureza = (natCPF, natCNPJ);
+  TNatureza = (natCPF, natCNPJ, natEstrangeiro);
 
   TPessoa = class(TInterfacedObject, iCadastro)
   private
