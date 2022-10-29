@@ -8,7 +8,7 @@ uses
   UClasse.Endereco, UClasse.Pessoa, FMX.Objects, FMX.Controls.Presentation,
   FMX.StdCtrls, FMX.Edit, FMX.ComboEdit, FMX.DateTimeCtrls, UConsultaCEP,
   UFuncoes.Texto, UControle.Service.Pessoa, URestUtil, UDmControle,
-  UClasseRepostaOp;
+  UClasseRepostaOp, UFuncoes.Validacao.CPF_CNPJ;
 
 type
   TFrmCadPessoa = class(TForm)
@@ -110,7 +110,12 @@ begin
   begin
     edtId.Text := IntToStr(idpessoa);
     CmbNatureza.ItemIndex := Integer(flnatureza);
+
     edtDocumento.Text := dsdocumento;
+
+    if flnatureza in [natCPF, natCNPJ] then
+      edtDocumento.Text := FormataCPF_CNPJ(edtDocumento.Text);
+
     edtNomeRazao.Text := nmprimeiro;
     edtNomeSecundario.Text := nmsegundo;
     EdtDataRegistro.Date := dtregistro;
@@ -197,10 +202,10 @@ begin
   if (Length(edtCEP.Text) <> 8) and (TNatureza(CmbNatureza.ItemIndex) in [natCPF, natCNPJ]) then
     raise Exception.Create('Informe um CEP válido');
 
-  if (Length(edtDocumento.Text) < 11) and (TNatureza(CmbNatureza.ItemIndex) in [natCPF]) then // #lembrar - criar validação do documento informado
+  if (not cpf(edtDocumento.Text)) and (TNatureza(CmbNatureza.ItemIndex) in [natCPF]) then
     raise Exception.Create('Informe um CPF válido');
 
-  if (Length(edtDocumento.Text) < 14) and (TNatureza(CmbNatureza.ItemIndex) in [natCNPJ]) then // #lembrar - criar validação do documento informado
+  if (not cnpj(edtDocumento.Text)) and (TNatureza(CmbNatureza.ItemIndex) in [natCNPJ]) then
     raise Exception.Create('Informe um CNPJ válido');
 
   Result := True;

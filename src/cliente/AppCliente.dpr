@@ -23,7 +23,9 @@ uses
   USistema in '..\classes-comum\negocio\USistema.pas',
   UClasse.EnderecoIntegracao in '..\classes-comum\negocio\UClasse.EnderecoIntegracao.pas',
   UClasseServidorClient in 'controle\UClasseServidorClient.pas',
-  UFrmConsPessoa in 'visao\UFrmConsPessoa.pas' {FrmConsPessoa};
+  UFrmConsPessoa in 'visao\UFrmConsPessoa.pas' {FrmConsPessoa},
+  UFuncoes.Mascara in '..\classes-comum\util\UFuncoes.Mascara.pas',
+  UFuncoes.Validacao.CPF_CNPJ in '..\classes-comum\util\UFuncoes.Validacao.CPF_CNPJ.pas';
 
 {$R *.res}
 

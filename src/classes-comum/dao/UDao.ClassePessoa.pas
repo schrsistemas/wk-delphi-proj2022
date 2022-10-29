@@ -237,7 +237,7 @@ function TDAOPessoa.ListarIds(Campo: string; Value: Variant): TStringList;
 begin
   Result := TStringList.Create;
 
-  Query := GeraQuery('SELECT idpessoa FROM pessoa;');
+  Query := GeraQuery('SELECT idpessoa FROM pessoa WHERE ' + Campo + ' LIKE ' + QuotedStr(Value) + ';');
 
   try
     Query.Close;

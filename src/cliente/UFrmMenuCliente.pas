@@ -71,11 +71,19 @@ end;
 
 procedure TFrmMenuCliente.FormDestroy(Sender: TObject);
 begin
-  if Assigned(DmControle) then
-    DmControle.Free;
+  try
+    if Assigned(DmControle) then
+      DmControle.Free;
+  except
 
-  if Assigned(Sistema) then
-    Sistema.Free;
+  end;
+
+  try
+    if Assigned(Sistema) then
+      Sistema.Free;
+  except
+
+  end;
 
 end;
 

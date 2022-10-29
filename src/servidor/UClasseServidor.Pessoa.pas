@@ -49,7 +49,14 @@ end;
 
 function TClasseServidorPessoa.Filtrar(Campo, Value: string): TObjectList<TPessoa>;
 begin
-
+  Result := TObjectList<TPessoa>.Create;
+  Result.Clear;
+  var DAOPessoa: TDAOPessoa := TDAOPessoa.Create;
+  var Ids: TStringList := DAOPessoa.ListarIds(Campo, Value);
+  for var I := 0 to Ids.Count - 1 do
+  begin
+    Result.Add(Get(StrToIntDef(Ids[I], 0)));
+  end;
 end;
 
 function TClasseServidorPessoa.Get(aID: Integer): TPessoa;

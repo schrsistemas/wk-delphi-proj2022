@@ -181,7 +181,6 @@
         <DCC_ExeOutput>..\..\bin</DCC_ExeOutput>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <DCC_UnitSearchPath>..\classes-comum\negocio\;..\classes-comum\controle\;..\classes-comum\dao\;..\classes-comum\util\;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
@@ -236,6 +235,8 @@
             <Form>FrmConsPessoa</Form>
             <FormType>fmx</FormType>
         </DCCReference>
+        <DCCReference Include="..\classes-comum\util\UFuncoes.Mascara.pas"/>
+        <DCCReference Include="..\classes-comum\util\UFuncoes.Validacao.CPF_CNPJ.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
