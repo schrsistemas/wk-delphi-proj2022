@@ -60,9 +60,13 @@ begin
   dlgOpen.InitialDir := ExtractFilePath(ParamStr(0));
   if dlgOpen.Execute then
   begin
-    TServPessoa.ImportarLista(dlgOpen.FileName);
+    try
+      TServPessoa.ImportarLista(dlgOpen.FileName);
+    except
+      on E: Exception do
+        ShowMessage(E.Message);
+    end;
   end;
-
 end;
 
 procedure TFrmMenuCliente.FormCreate(Sender: TObject);
@@ -153,7 +157,12 @@ begin
   dlgSave.InitialDir := ExtractFilePath(ParamStr(0));
   if dlgSave.Execute then
   begin
-    TServPessoa.ExportarLista(dlgSave.FileName);
+    try
+      TServPessoa.ExportarLista(dlgSave.FileName);
+    except
+      on E: Exception do
+        ShowMessage(E.Message);
+    end;
   end;
 end;
 
