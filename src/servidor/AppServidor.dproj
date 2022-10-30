@@ -202,6 +202,7 @@
         <DCCReference Include="UClasseServidor.pas"/>
         <DCCReference Include="UClasseServidor.Pessoa.pas"/>
         <DCCReference Include="UClasseServidor.GED.pas"/>
+        <DCCReference Include="UThreadMonitorGED.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

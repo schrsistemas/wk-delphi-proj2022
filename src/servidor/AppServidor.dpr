@@ -32,7 +32,8 @@ uses
   UDmSC in 'UDmSC.pas' {DmSC: TDataModule},
   UClasseServidor in 'UClasseServidor.pas',
   UClasseServidor.Pessoa in 'UClasseServidor.Pessoa.pas',
-  UClasseServidor.GED in 'UClasseServidor.GED.pas';
+  UClasseServidor.GED in 'UClasseServidor.GED.pas',
+  UThreadMonitorGED in 'UThreadMonitorGED.pas';
 
 {$R *.res}
 
