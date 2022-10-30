@@ -25,7 +25,8 @@ uses
   UClasseServidorClient in 'controle\UClasseServidorClient.pas',
   UFrmConsPessoa in 'visao\UFrmConsPessoa.pas' {FrmConsPessoa},
   UFuncoes.Mascara in '..\classes-comum\util\UFuncoes.Mascara.pas',
-  UFuncoes.Validacao.CPF_CNPJ in '..\classes-comum\util\UFuncoes.Validacao.CPF_CNPJ.pas';
+  UFuncoes.Validacao.CPF_CNPJ in '..\classes-comum\util\UFuncoes.Validacao.CPF_CNPJ.pas',
+  UControle.Service.Arquivo in 'controle\UControle.Service.Arquivo.pas';
 
 {$R *.res}
 

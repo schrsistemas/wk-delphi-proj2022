@@ -31,7 +31,8 @@ uses
   UControle.ClasseCfgAppServidor in '..\classes-comum\controle\UControle.ClasseCfgAppServidor.pas',
   UDmSC in 'UDmSC.pas' {DmSC: TDataModule},
   UClasseServidor in 'UClasseServidor.pas',
-  UClasseServidor.Pessoa in 'UClasseServidor.Pessoa.pas';
+  UClasseServidor.Pessoa in 'UClasseServidor.Pessoa.pas',
+  UClasseServidor.GED in 'UClasseServidor.GED.pas';
 
 {$R *.res}
 

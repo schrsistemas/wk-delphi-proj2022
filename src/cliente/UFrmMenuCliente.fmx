@@ -16,7 +16,7 @@ object FrmMenuCliente: TFrmMenuCliente
     Size.Width = 815.000000000000000000
     Size.Height = 624.000000000000000000
     Size.PlatformDefault = False
-    TabOrder = 3
+    TabOrder = 1
     object tbcContainer: TTabControl
       Align = Client
       Margins.Left = 4.000000000000000000
@@ -110,10 +110,10 @@ object FrmMenuCliente: TFrmMenuCliente
         ExplicitSize.cx = 81.000000000000000000
         ExplicitSize.cy = 26.000000000000000000
         object btnImportarDados: TSpeedButton
-          Align = Client
+          Align = Top
           StyledSettings = [Family, FontColor]
           Size.Width = 807.000000000000000000
-          Size.Height = 376.000000000000000000
+          Size.Height = 97.000000000000000000
           Size.PlatformDefault = False
           Text = 'Importar Dados'
           TextSettings.Font.Size = 16.000000000000000000
@@ -132,15 +132,26 @@ object FrmMenuCliente: TFrmMenuCliente
           ReadOnly = True
           StyledSettings = [Family, Size, FontColor]
           TextSettings.Font.StyleExt = {00070000000000000004000000}
-          Align = Bottom
-          Position.Y = 376.000000000000000000
+          Align = Top
+          Position.Y = 97.000000000000000000
           Size.Width = 807.000000000000000000
           Size.Height = 214.000000000000000000
           Size.PlatformDefault = False
-          TabOrder = 9
+          TabOrder = 1
           TabStop = False
           Viewport.Width = 803.000000000000000000
           Viewport.Height = 210.000000000000000000
+        end
+        object SBImportarArquivo: TSpeedButton
+          Align = Bottom
+          StyledSettings = [Family, FontColor]
+          Position.Y = 493.000000000000000000
+          Size.Width = 807.000000000000000000
+          Size.Height = 97.000000000000000000
+          Size.PlatformDefault = False
+          Text = 'Importar Arquivo'
+          TextSettings.Font.Size = 16.000000000000000000
+          OnClick = SBImportarArquivoClick
         end
       end
       object tbtmExporta: TTabItem
@@ -186,7 +197,7 @@ object FrmMenuCliente: TFrmMenuCliente
             Size.PlatformDefault = False
             TextSettings.HorzAlign = Trailing
             Text = 'Servidor:'
-            TabOrder = 1
+            TabOrder = 0
           end
           object SBTestar: TSpeedButton
             Align = Bottom
@@ -224,7 +235,7 @@ object FrmMenuCliente: TFrmMenuCliente
           end
           object edtServidor: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
-            TabOrder = 2
+            TabOrder = 1
             Position.X = 104.000000000000000000
             Position.Y = 32.000000000000000000
             Size.Width = 193.000000000000000000
@@ -239,11 +250,11 @@ object FrmMenuCliente: TFrmMenuCliente
             Size.PlatformDefault = False
             TextSettings.HorzAlign = Trailing
             Text = 'Porta:'
-            TabOrder = 3
+            TabOrder = 2
           end
           object edtPorta: TEdit
             Touch.InteractiveGestures = [LongTap, DoubleTap]
-            TabOrder = 4
+            TabOrder = 3
             Position.X = 104.000000000000000000
             Position.Y = 64.000000000000000000
             Size.Width = 65.000000000000000000
@@ -255,7 +266,7 @@ object FrmMenuCliente: TFrmMenuCliente
     end
   end
   object dlgOpen: TOpenDialog
-    Filter = 'Arquivos CSV (*.CSV)|*.CSV'
+    Filter = 'Arquivos CSV (*.CSV)|*.CSV|Todos os arquivos (*.*)|*.*'
     Left = 592
     Top = 200
   end

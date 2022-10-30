@@ -237,6 +237,7 @@
         </DCCReference>
         <DCCReference Include="..\classes-comum\util\UFuncoes.Mascara.pas"/>
         <DCCReference Include="..\classes-comum\util\UFuncoes.Validacao.CPF_CNPJ.pas"/>
+        <DCCReference Include="controle\UControle.Service.Arquivo.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

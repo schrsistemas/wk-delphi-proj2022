@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 29/10/2022 11:49:29
+// 30/10/2022 10:38:01
 //
 
 unit UClasseServidorClient;
@@ -46,6 +46,16 @@ type
     function ImportarLista(listaCSV: TStringList): Boolean;
     function Exportar: TStream;
     function ExportarLista: TStringList;
+  end;
+
+  TClasseServidorGEDClient = class(TDSAdminClient)
+  private
+    FpUploadArquivoCommand: TDBXCommand;
+  public
+    constructor Create(ADBXConnection: TDBXConnection); overload;
+    constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function pUploadArquivo(pArquivoJSON: TJSONArray): Boolean;
   end;
 
 implementation
@@ -347,6 +357,36 @@ begin
   FImportarListaCommand.DisposeOf;
   FExportarCommand.DisposeOf;
   FExportarListaCommand.DisposeOf;
+  inherited;
+end;
+
+function TClasseServidorGEDClient.pUploadArquivo(pArquivoJSON: TJSONArray): Boolean;
+begin
+  if FpUploadArquivoCommand = nil then
+  begin
+    FpUploadArquivoCommand := FDBXConnection.CreateCommand;
+    FpUploadArquivoCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FpUploadArquivoCommand.Text := 'TClasseServidorGED.pUploadArquivo';
+    FpUploadArquivoCommand.Prepare;
+  end;
+  FpUploadArquivoCommand.Parameters[0].Value.SetJSONValue(pArquivoJSON, FInstanceOwner);
+  FpUploadArquivoCommand.ExecuteUpdate;
+  Result := FpUploadArquivoCommand.Parameters[1].Value.GetBoolean;
+end;
+
+constructor TClasseServidorGEDClient.Create(ADBXConnection: TDBXConnection);
+begin
+  inherited Create(ADBXConnection);
+end;
+
+constructor TClasseServidorGEDClient.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ADBXConnection, AInstanceOwner);
+end;
+
+destructor TClasseServidorGEDClient.Destroy;
+begin
+  FpUploadArquivoCommand.DisposeOf;
   inherited;
 end;
 

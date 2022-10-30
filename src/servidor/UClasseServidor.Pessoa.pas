@@ -129,37 +129,46 @@ var
   end;
 
 begin
+  Result := False;
 
   var auxPessoa := TControlePessoa.Create;
   Contador := 0;
   for var l := 0 to listaCSV.Count - 1 do
   begin
-    Contador := Contador + 1;
+    try
+      Contador := Contador + 1;
     // CODIGO;NATUREZA;DOCUMENTO;NOME_RAZAO;NOME_SECUNDARIO;CEP;LOGRADOURO;BAIRRO;CIDADE;UF;COMPLEMENTO;
-    I := 0;
-    Linha := listaCSV[l];
+      I := 0;
+      Linha := listaCSV[l];
 
-    var pessoa := TPessoa.Create;
+      var pessoa := TPessoa.Create;
 
-    pessoa.idpessoa := 0;
-    MontaValor;
-    pessoa.flnatureza := natNI;
-    MontaValor;
-    pessoa.dsdocumento := MontaValor;
-    pessoa.nmprimeiro := MontaValor;
-    pessoa.nmsegundo := MontaValor;
+      pessoa.idpessoa := 0;
+      MontaValor;
+      pessoa.flnatureza := natNI;
+      MontaValor;
+      pessoa.dsdocumento := MontaValor;
+      pessoa.nmprimeiro := MontaValor;
+      pessoa.nmsegundo := MontaValor;
 
-    pessoa.endereco.dscep := MontaValor;
+      pessoa.endereco.dscep := MontaValor;
 
-    pessoa.enderecoIntegracao.nmlogradouro := MontaValor;
-    pessoa.enderecoIntegracao.nmbairro := MontaValor;
-    pessoa.enderecoIntegracao.nmcidade := MontaValor;
-    pessoa.enderecoIntegracao.dsuf := MontaValor;
-    pessoa.enderecoIntegracao.dscomplemento := MontaValor;
+      pessoa.enderecoIntegracao.nmlogradouro := MontaValor;
+      pessoa.enderecoIntegracao.nmbairro := MontaValor;
+      pessoa.enderecoIntegracao.nmcidade := MontaValor;
+      pessoa.enderecoIntegracao.dsuf := MontaValor;
+      pessoa.enderecoIntegracao.dscomplemento := MontaValor;
 
-    auxPessoa.Gravar(pessoa);
+      auxPessoa.Gravar(pessoa);
+
+    except
+      on E: Exception do
+        raise E;
+    end;
 
   end;
+
+  Result := True;
 end;
 
 function TClasseServidorPessoa.Listar: TObjectList<TPessoa>;

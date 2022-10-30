@@ -9,7 +9,8 @@ uses
   Data.Bind.Components, Data.Bind.ObjectScope, REST.Client, Data.FMTBcd,
   DataSnap.DBClient, FireDAC.Phys.TDBXDef, FireDAC.Stan.Intf, FireDAC.Phys,
   FireDAC.Phys.TDBXBase, FireDAC.Phys.TDBX, Data.Bind.DBScope,
-  Data.Bind.DBXScope, UClasseServidor, UClasseServidor.Pessoa, Datasnap.DSHTTP;
+  Data.Bind.DBXScope, UClasseServidor, UClasseServidor.Pessoa, Datasnap.DSHTTP,
+  UClasseServidor.GED;
 
 type
   iServerRest = interface
@@ -35,10 +36,12 @@ type
     DSHTTPServiceFileDispatcher: TDSHTTPServiceFileDispatcher;
     DSHTTPService: TDSHTTPService;
     DSAuthenticationManager: TDSAuthenticationManager;
+    DSServerClassGED: TDSServerClass;
     procedure DSAuthenticationManagerUserAuthenticate(Sender: TObject; const Protocol, Context, User, Password: string; var valid: Boolean; UserRoles: TStrings);
     procedure DSAuthenticationManagerUserAuthorize(Sender: TObject; AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
     procedure DSServerClassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
     procedure DSServerClassPessoaGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+    procedure DSServerClassGEDGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
   private
     FthreadMonitorEndereco: TThreadMonitorEndereco;
     { Private declarations }
@@ -101,6 +104,11 @@ end;
 procedure TDmSC.DSAuthenticationManagerUserAuthorize(Sender: TObject; AuthorizeEventObject: TDSAuthorizeEventObject; var valid: Boolean);
 begin
   valid := True;
+end;
+
+procedure TDmSC.DSServerClassGEDGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);
+begin
+  PersistentClass := TClasseServidorGED;
 end;
 
 procedure TDmSC.DSServerClassGetClass(DSServerClass: TDSServerClass; var PersistentClass: TPersistentClass);

@@ -75,4 +75,10 @@ object DmSC: TDmSC
     Left = 176
     Top = 192
   end
+  object DSServerClassGED: TDSServerClass
+    OnGetClass = DSServerClassGEDGetClass
+    Server = DSServer
+    Left = 336
+    Top = 440
+  end
 end

@@ -6,7 +6,7 @@ uses
   System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   FMX.TabControl, FMX.Controls.Presentation, FMX.StdCtrls, FMX.Edit, USistema,
-  UControle.Service.Pessoa, FMX.ScrollBox, FMX.Memo;
+  UControle.Service.Pessoa, FMX.ScrollBox, FMX.Memo, UControle.Service.Arquivo;
 
 type
   TFrmMenuCliente = class(TForm)
@@ -30,6 +30,7 @@ type
     dlgOpen: TOpenDialog;
     mmoExemploImp: TMemo;
     dlgSave: TSaveDialog;
+    SBImportarArquivo: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure SBTestarClick(Sender: TObject);
@@ -38,6 +39,7 @@ type
     procedure tbtmCadastroClick(Sender: TObject);
     procedure tbtmConsultaClick(Sender: TObject);
     procedure tbtmExportaClick(Sender: TObject);
+    procedure SBImportarArquivoClick(Sender: TObject);
   private
     { Private declarations }
     procedure InitComponents;
@@ -61,7 +63,8 @@ begin
   if dlgOpen.Execute then
   begin
     try
-      TServPessoa.ImportarLista(dlgOpen.FileName);
+      if TServPessoa.ImportarLista(dlgOpen.FileName) then
+        ShowMessage('Arquivo Importado!');
     except
       on E: Exception do
         ShowMessage(E.Message);
@@ -127,6 +130,13 @@ begin
 
     end).start();
 
+end;
+
+procedure TFrmMenuCliente.SBImportarArquivoClick(Sender: TObject);
+begin
+  if dlgOpen.Execute then
+    if TServArquivo.ImportarArquivo(dlgOpen.FileName) then
+      ShowMessage('Arquivo Importado para o servidor!');
 end;
 
 procedure TFrmMenuCliente.SBTestarClick(Sender: TObject);
