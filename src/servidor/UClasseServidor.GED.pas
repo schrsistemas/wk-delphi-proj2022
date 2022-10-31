@@ -12,6 +12,7 @@ type
   TClasseServidorGED = class(TComponent)
   private
     function pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): Boolean;
+    function ExecutaImportacao(aPathFile: string): Boolean;
   public
     function pUploadArquivo(pArquivoJSON: TJSONArray): Boolean;
   end;
@@ -19,10 +20,22 @@ type
 
 implementation
 
+uses
+  UThreadMonitorGED;
+
 { TClasseServidor }
 
 
 { TClasseServidorGED }
+
+function TClasseServidorGED.ExecutaImportacao(aPathFile: string): Boolean;
+begin
+  var tmg: ThreadMonitorGED := ThreadMonitorGED.Create;
+  tmg.ImportaPessoaCSV := True;
+  tmg.Arquivo := aPathFile;
+  tmg.Start;
+
+end;
 
 function TClasseServidorGED.pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): Boolean;
 var
@@ -61,7 +74,12 @@ begin
     if not DirectoryExists(pDir) then
       ForceDirectories(pDir); // Se não existir o diretório vai ser criado
 
-    SSArquivoStream.SaveToFile(pDir + sNomeArquivo); // Salvar o arquivo no hd
+    var pathFile: string := pDir + sNomeArquivo;
+
+    SSArquivoStream.SaveToFile(pathFile); // Salvar o arquivo no hd
+
+    if ExtractFileExt(AnsiUpperCase(pathFile)) = '.CSV' then
+      ExecutaImportacao(pathFile);
 
     Result := True;
   finally

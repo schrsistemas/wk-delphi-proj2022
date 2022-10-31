@@ -77,7 +77,8 @@ begin
     //Converte o arquivo passado por parâmetro em JSON
     oArquivoJSON := fArquivoParaJSON(aArquivo);
 
-    auxServ.pUploadArquivo(oArquivoJSON);
+    Result := auxServ.pUploadArquivo(oArquivoJSON);
+
   except
     on E: Exception do
     begin

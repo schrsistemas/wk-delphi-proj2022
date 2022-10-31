@@ -115,7 +115,7 @@ object FrmMenuCliente: TFrmMenuCliente
           Size.Width = 807.000000000000000000
           Size.Height = 97.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Importar Dados'
+          Text = 'Importar Dados (M'#233'todo 01)'
           TextSettings.Font.Size = 16.000000000000000000
           OnClick = btnImportarDadosClick
         end
@@ -123,17 +123,23 @@ object FrmMenuCliente: TFrmMenuCliente
           Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
           DataDetectorTypes = []
           Lines.Strings = (
-            'Layout exemplo de Importa'#231#227'o:'
+            'Layout exemplo de Importa'#231#227'o (M'#233'todo 01):'
             ''
             
-              'CODIGO;NATUREZA;DOCUMENTO;NOME_RAZAO;NOME_SECUNDARIO;CEP;LOGRADO' +
-              'URO;BAIRRO;CIDADE;UF;COMPLEMENTO;'
+              'CODIGO|NATUREZA|DOCUMENTO|NOME_RAZAO|NOME_SECUNDARIO|CEP|LOGRADO' +
+              'URO|BAIRRO|CIDADE|UF|COMPLEMENTO|'
+            ''
+            ''
+            ''
+            'Layout exemplo de Importa'#231#227'o (M'#233'todo 02):'
+            ''
+            'DOCUMENTO|NOME_RAZAO|NOME_SECUNDARIO|CEP|'
             '')
           ReadOnly = True
           StyledSettings = [Family, Size, FontColor]
           TextSettings.Font.StyleExt = {00070000000000000004000000}
-          Align = Top
-          Position.Y = 97.000000000000000000
+          Align = Bottom
+          Position.Y = 376.000000000000000000
           Size.Width = 807.000000000000000000
           Size.Height = 214.000000000000000000
           Size.PlatformDefault = False
@@ -143,13 +149,13 @@ object FrmMenuCliente: TFrmMenuCliente
           Viewport.Height = 210.000000000000000000
         end
         object SBImportarArquivo: TSpeedButton
-          Align = Bottom
+          Align = Top
           StyledSettings = [Family, FontColor]
-          Position.Y = 493.000000000000000000
+          Position.Y = 97.000000000000000000
           Size.Width = 807.000000000000000000
           Size.Height = 97.000000000000000000
           Size.PlatformDefault = False
-          Text = 'Importar Arquivo'
+          Text = 'Importar Dados (M'#233'todo 02)'
           TextSettings.Font.Size = 16.000000000000000000
           OnClick = SBImportarArquivoClick
         end
