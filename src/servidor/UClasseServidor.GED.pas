@@ -11,7 +11,7 @@ type
     {$METHODINFO ON}
   TClasseServidorGED = class(TComponent)
   private
-    function pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): Boolean;
+    function pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): string;
     function ExecutaImportacao(aPathFile: string): Boolean;
   public
     function pUploadArquivo(pArquivoJSON: TJSONArray): Boolean;
@@ -37,15 +37,16 @@ begin
 
 end;
 
-function TClasseServidorGED.pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): Boolean;
+function TClasseServidorGED.pJSONParaArquivo(pArquivoJSON: TJSONArray; const pDir: string): string;
 var
   SSArquivoStream: TStringStream;
   sArquivoString, sNomeArquivo: string;
   iTamanhoArquivo, iCont: Integer;
   SLArrayStringsArquivo: TStringList;
   byArquivoBytes: Tbytes;
+  pathFile: string;
 begin
-  Result := False;
+  Result := '';
   try
     sArquivoString := pArquivoJSON.Get(0).ToString;  // Pega a posição 0 do array que contem os bytes do arquivo
     Delete(sArquivoString, Length(sArquivoString), 1); // Deleta a última aspas da string
@@ -74,14 +75,11 @@ begin
     if not DirectoryExists(pDir) then
       ForceDirectories(pDir); // Se não existir o diretório vai ser criado
 
-    var pathFile: string := pDir + sNomeArquivo;
+    pathFile := pDir + sNomeArquivo;
 
     SSArquivoStream.SaveToFile(pathFile); // Salvar o arquivo no hd
 
-    if ExtractFileExt(AnsiUpperCase(pathFile)) = '.CSV' then
-      ExecutaImportacao(pathFile);
-
-    Result := True;
+    Result := pathFile;
   finally
     SSArquivoStream.Free;
     SLArrayStringsArquivo.Free;
@@ -91,7 +89,12 @@ end;
 function TClasseServidorGED.pUploadArquivo(pArquivoJSON: TJSONArray): Boolean;
 begin
   ForceDirectories(ExtractFilePath(ParamStr(0)) + 'GED\');
-  Result := pJSONParaArquivo(pArquivoJSON, ExtractFilePath(ParamStr(0)) + 'GED\');
+  var pathFile := pJSONParaArquivo(pArquivoJSON, ExtractFilePath(ParamStr(0)) + 'GED\');
+
+  if FileExists(pathFile) and (ExtractFileExt(AnsiUpperCase(pathFile)) = '.CSV') then
+    ExecutaImportacao(pathFile);
+
+  Result := True;
 end;
 
 end.
