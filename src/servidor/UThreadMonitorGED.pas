@@ -16,6 +16,8 @@ type
     property Arquivo: string read FArquivo write FArquivo;
     property ImportaPessoaCSV: Boolean read FImportaPessoaCSV write FImportaPessoaCSV;
 
+    procedure Importar;
+
     constructor Create;
   end;
 
@@ -67,6 +69,11 @@ begin
 end;
 
 procedure ThreadMonitorGED.Execute;
+begin
+
+end;
+
+procedure ThreadMonitorGED.Importar;
 var
   Contador, I: Integer;
   Linha: string;

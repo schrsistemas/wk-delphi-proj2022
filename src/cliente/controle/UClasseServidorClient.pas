@@ -1,6 +1,6 @@
 //
 // Created by the DataSnap proxy generator.
-// 30/10/2022 10:38:01
+// 31/10/2022 09:04:53
 //
 
 unit UClasseServidorClient;

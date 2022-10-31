@@ -30,10 +30,15 @@ uses
 
 function TClasseServidorGED.ExecutaImportacao(aPathFile: string): Boolean;
 begin
+  {var tmg: ThreadMonitorGED := ThreadMonitorGED.Create;
+  tmg.ImportaPessoaCSV := True;
+  tmg.Arquivo := aPathFile;
+  tmg.Start;}
+
   var tmg: ThreadMonitorGED := ThreadMonitorGED.Create;
   tmg.ImportaPessoaCSV := True;
   tmg.Arquivo := aPathFile;
-  tmg.Start;
+  tmg.Importar;
 
 end;
 
